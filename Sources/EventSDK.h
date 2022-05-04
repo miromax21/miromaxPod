@@ -2,7 +2,7 @@
 //  EventSDK.h
 //  EventSDK
 //
-//  Created by Sergey Zhidkov on 11.04.2022.
+//  Created by Maksim Mironov on 11.04.2022.
 //
 
 #import <Foundation/Foundation.h>
