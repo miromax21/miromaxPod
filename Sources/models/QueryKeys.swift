@@ -8,10 +8,10 @@
 import Foundation
 
 enum QueryKeys: String {
-  //UserData
+  //  UserData
   case contactType = "type"
   case partnerName = "cid"
-  case srcType = "typ"
+
   case frameTs = "fts"
   case hardId = "hid"
   case catId = "idc"
@@ -23,20 +23,26 @@ enum QueryKeys: String {
   case view = "view"
   case uid = "uid"
   
-  // PackageData
+  //  PackageData
+  case deviceInterface = "dvi"
   case deviceIdType = "dvid"
   case deviceModel = "dvm"
   case deviceMNFC = "dvn"
   case appVersion = "appv"
   case deviceType = "dvt"
   case uidClass = "uidc"
+  case srcType = "typ"
   case uidType = "uidt"
   case appName = "appn"
   case osInfo = "os"
+  
+  case sessionId = "sid"
+  case timeInit = "tsu"
+  case timeUpload = "tsc"
 }
 
 enum DefaultQueryKeysValues: String {
   case uidClass = "1"
-  case deviceType = "2"
+  case deviceIdentity = "2"
   case deviceMNFC = "apple"
 }

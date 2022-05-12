@@ -17,6 +17,7 @@
 		CD800F692806EA0A007EB8D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F682806EA0A007EB8D2 /* Configuration.swift */; };
 		CD800F6B2806FAE8007EB8D2 /* ModelEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */; };
 		CDA9D180281A7A380021A799 /* extension.NSLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D17F281A7A380021A799 /* extension.NSLock.swift */; };
+		CDB0ED56282555F000B42744 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0ED55282555F000B42744 /* Identity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		CD800F682806EA0A007EB8D2 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelEnums.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CDA9D17F281A7A380021A799 /* extension.NSLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.NSLock.swift; sourceTree = "<group>"; };
+		CDB0ED55282555F000B42744 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				CD800F5B28059E78007EB8D2 /* Event.swift */,
 				CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */,
 				CD800F612806B6A1007EB8D2 /* QueryKeys.swift */,
+				CDB0ED55282555F000B42744 /* Identity.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				CD800F6B2806FAE8007EB8D2 /* ModelEnums.swift in Sources */,
 				CDA9D180281A7A380021A799 /* extension.NSLock.swift in Sources */,
 				CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */,
+				CDB0ED56282555F000B42744 /* Identity.swift in Sources */,
 				CD800F622806B6A1007EB8D2 /* QueryKeys.swift in Sources */,
 				CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */,
 			);
