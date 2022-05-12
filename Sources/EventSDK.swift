@@ -6,28 +6,29 @@
 //
 
 import Foundation
-public typealias Action = (_ success: Bool) -> ()
-public protocol EventFactoryType{
+
+public protocol EventFactoryProtocol{
   func next(send event: Event)
 }
 
-public final class EventFactory: EventFactoryType {
-  
-  /// User configuration object
-  public let clientConfig: Configuration!
-  
-  /// A list of plugins.
-  /// e.g. for logging, network activity indicator or credentials.
-  public let plugins: [PluginType]
-
-  private let lock = NSLock()
-  
-  private(set) var sendQueue: [Event] = []
+public final class EventFactory: EventFactoryProtocol {
   
   private lazy var baseQueryItems: [[QueryKeys: Any?]] = {
     let depaultPackage = DefaultPackageData()
     return depaultPackage.initBaseQuery(join: queryDictionary())
   }()
+  
+  private let lock = NSRecursiveLock()
+  
+  /// User configuration object
+  public var clientConfiguration: ConfigurationType!
+  
+  /// A list of plugins.
+  /// e.g. for logging, network activity indicator or credentials.
+  public var plugins: [PluginType] = []
+  
+  /// A list of events that, for whatever reason, were not sent
+  public private(set) var sendQueue: [Event] = []
   
   /// Creates a new EventFactory
   ///
@@ -35,10 +36,10 @@ public final class EventFactory: EventFactoryType {
   /// - Parameters:
   ///   - configuration: an object containing user information
   public init(
-    configuration: Configuration,
+    configuration: ConfigurationType,
     plugins: [PluginType] = []
   ) {
-    self.clientConfig = configuration
+    self.clientConfiguration = configuration
     self.plugins = plugins
   }
   
@@ -55,34 +56,40 @@ public final class EventFactory: EventFactoryType {
   }
 }
 
-private extension EventFactory{
+extension EventFactory{
   private func sendNext(event: Event, fromQueue: Bool = false){
     let nextQueryDictionary = initQuery(event: event)
     sendData(query: nextQueryDictionary) { [weak self] success in
       guard !success && fromQueue || !fromQueue && success else {
         return
       }
-      
-      if !success && !fromQueue{
-        self?.lock.with { [weak self] in
-          self?.sendQueue.append(event)
-        }
-      }
-      
-      if success && fromQueue {
-        self?.lock.with { [weak self] in
-          self?.sendQueue = self?.sendQueue.filter{$0 == event} ?? []
-        }
+      self?.upplyEvent(event: event, success && fromQueue)
+    }
+  }
+  
+  private func upplyEvent(event: Event, _ success: Bool){
+    lock.with { [weak self] in
+      guard let self = self else { return }
+      if success {
+        self.sendQueue = self.sendQueue.filter{$0 == event}
+      } else {
+        self.sendQueue.append(event)
       }
     }
   }
 
   private func sendData(query: [[QueryKeys: Any?]], completion: Action? = nil) {
-    let queryitems = query.compactMap {
+    
+    let service = RequestService(plugins: self.plugins)
+    var urlComponents = clientConfiguration.urlComponents
+    urlComponents?.queryItems = query.compactMap {
       URLQueryItem(name: "\($0.keys.first!.rawValue)" , value: String(describing: $0.values.first ?? ""))
     }
-    let service = RequestService(plugins: self.plugins)
-    service.sendData(queryitems: queryitems, path: clientConfig.urlPath) { success in
+    
+    guard let url = urlComponents?.url else {
+      return
+    }
+    service.sendRequest(request: URLRequest(url: url)) { success in
       completion?(success)
     }
   }
@@ -90,6 +97,7 @@ private extension EventFactory{
   private func initQuery(event: Event) -> [[QueryKeys: Any?]]{
     let query: [[QueryKeys: Any?]] = [
       [.contactType : event.contactType],
+      [.timeInit : DeviceUtils.shared.getCurrentTimeStamp()],
       [.frameTs : event.frameTs],
       [.frameTs : event.media],
       [.cuUrl : event.cuUrl],
@@ -97,6 +105,7 @@ private extension EventFactory{
       [.cuVer : event.cuVer],
       [.cuId : event.cuId],
       [.view : event.view],
+
     ]
     let extendedQuery = extendQuery(join: query)
     return extendedQuery
@@ -107,16 +116,16 @@ private extension EventFactory{
     with.forEach{
       query.append($0)
     }
+    query.append([.timeUpload: String(describing: DeviceUtils.shared.getCurrentTimeStamp())])
     return query
   }
   
   private func queryDictionary() -> [[QueryKeys: Any?]] {
     return [
-      [.partnerName : clientConfig.partnerName],
-      [.srcType : clientConfig.srctype],
-      [.hardId : clientConfig.hardId],
-      [.catId : clientConfig.catId],
-      [.uid : clientConfig.uid],
+      [.partnerName : clientConfiguration.partnerName],
+      [.hardId : clientConfiguration.hardId],
+      [.catId : clientConfiguration.catId],
+      [.uid : clientConfiguration.uid],
     ]
   }
 }

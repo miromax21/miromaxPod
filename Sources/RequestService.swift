@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import CoreVideo
+import UIKit
+public typealias Action = (_ success: Bool) -> ()
 public protocol PluginType {
-    /// Called to modify a request before sending.
+  /// Called to modify a request before sending.
   func prepare(_ request: URLRequest) -> URLRequest
 }
 
@@ -19,20 +22,6 @@ struct RequestService {
     self.plugins = plugins
   }
   
-  func sendData(queryitems: [URLQueryItem] = [], path: String? = nil, completion: @escaping Action){
-    let request = makeRequest(queryitems, path)
-    sendRequest(request: request, completion: completion)
-  }
-  
-  func makeRequest(_ queryitems: [URLQueryItem] = [], _  path: String! = "") -> URLRequest {
-    var urlComponents = URLComponents()
-    urlComponents.scheme = "https"
-    urlComponents.host = "tns-counter.ru"
-    urlComponents.path = path
-    urlComponents.queryItems = queryitems
-    return URLRequest(url: urlComponents.url!)
-  }
-  
   func sendRequest(request: URLRequest, completion: @escaping Action){
     var currentRequest = request
     let urlSession = URLSessionApiSrevices()
@@ -41,7 +30,7 @@ struct RequestService {
         currentRequest = $0.prepare(request)
       }
     }
-    urlSession.send(with: currentRequest) { success in
+    urlSession.callAPI(request: currentRequest) { success in
         completion(success)
     }
   }
@@ -49,15 +38,17 @@ struct RequestService {
 }
 
 struct URLSessionApiSrevices {
+  var error : String?
+  
   private var urlSession: URLSession
   
   fileprivate let cache = URLCache.shared
   
-  public init(config:URLSessionConfiguration = URLSessionConfiguration.default) {
+  public init(config:URLSessionConfiguration = .default) {
     self.urlSession = URLSession(configuration: config)
   }
   
-  func send(with request: URLRequest, completion: @escaping (Bool) -> ()) {
+  func callAPI(request: URLRequest, completion: @escaping (Bool) -> ())  {
     let task = self.urlSession.dataTask(with: request) { (data, response, error) in
       if error != nil {
         completion(false)
@@ -73,5 +64,3 @@ struct URLSessionApiSrevices {
   }
   
 }
-
-

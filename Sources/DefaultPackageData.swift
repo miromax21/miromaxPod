@@ -7,47 +7,29 @@
 
 import Foundation
 final class DefaultPackageData {
-  
-  private var deviceIdType : String!
-  private var deviceModel : String!
-  private var appVersion : String!
-  private var deviceType : String!
-  private var deviceMNFC : String!
-  private var uidClass : Int!
-  private var appName : String!
-  private var osInfo : String!
 
-  private var uidType : String?
-  
   private var osVersion : String {
       let version = ProcessInfo().operatingSystemVersion
       return "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
   }
   
   private lazy var queryDictionary: [[QueryKeys: Any?]] = {
+    let device = DeviceUtils.shared
     return [
-      [.deviceModel : deviceModel],
-      [.deviceType : deviceType],
-      [.deviceMNFC : deviceMNFC],
-      [.appVersion : appVersion],
-      [.uidClass : uidClass],
-      [.uidType : uidType],
-      [.appName : appName],
-      [.osInfo : osInfo],
+      [.deviceInterface: DefaultQueryKeysValues.deviceIdentity.rawValue],
+      [.deviceIdType : device.identity.id],
+      [.deviceModel : device.getDeviceName()],
+      [.deviceMNFC : DefaultQueryKeysValues.deviceMNFC.rawValue],
+      [.appVersion : getBundleData(for: "CFBundleShortVersionString")],
+      [.deviceType : device.identity.type],
+      [.sessionId : device.uuid],
+      [.timeInit : device.getCurrentTimeStamp],
+      [.uidClass : Int(DefaultQueryKeysValues.uidClass.rawValue) ?? 0],
+      [.uidType : ""],
+      [.appName : getBundleData(for: "CFBundleName")],
+      [.osInfo : "ios \(osVersion)"],
     ]
   }()
-  
-  init() {
-    appVersion = getBundleData(for: "CFBundleShortVersionString")
-    uidClass = Int(DefaultQueryKeysValues.uidClass.rawValue) ?? 0
-    deviceMNFC  = DefaultQueryKeysValues.deviceMNFC.rawValue
-    deviceType = DefaultQueryKeysValues.deviceType.rawValue
-    deviceModel = DeviceUtils.shared.getDeviceName()
-    appName = getBundleData(for: "CFBundleVersion")
-    osInfo = "ios \(osVersion)"
-    deviceIdType = ""
-    uidType = ""
-  }
   
   func initBaseQuery(join with: [[QueryKeys: Any?]] ) -> [[QueryKeys: Any?]]{
     var query = queryDictionary
