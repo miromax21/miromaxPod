@@ -9,11 +9,19 @@ import Foundation
 import AppTrackingTransparency
 import AdSupport
 import UIKit
-class DeviceUtils {
+final class DeviceData {
   
-  static var shared = DeviceUtils()
-  
-  init(){}
+  var uuid: String {
+    get {
+      if let id = UserDefaults.standard.string(forKey: "uuid") {
+        return id
+      } else {
+        let uuid = UUID().uuidString
+        UserDefaults.standard.set(uuid, forKey: "uuid")
+        return uuid
+      }
+    }
+  }
   
   lazy var idfa: String? = {
     if #available(iOS 14, *) {
@@ -28,33 +36,11 @@ class DeviceUtils {
     return ASIdentifierManager.shared().advertisingIdentifier.uuidString
   }()
   
-  var uuid: String {
-    get {
-      if let id = UserDefaults.standard.string(forKey: "uuid") {
-        return id
-      } else {
-        let uuid = UUID().uuidString
-        UserDefaults.standard.set(uuid, forKey: "uuid")
-        return uuid
-      }
-    }
-  }
-  
-  lazy var identity: Identity = {
-    if let idfa = self.idfa {
-      return Identity(id: idfa, type: "1")
-    }
-    if let idfv = UIDevice.current.identifierForVendor?.uuidString {
-      return Identity(id: idfv, type: "2")
-    }
-    return Identity(id: uuid, type: "3")
+  lazy var identity: String = {
+    let idfa = self.idfa ?? ""
+    let idfv = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    return "\(idfa);\(idfv)"
   }()
-  
-  func getCurrentTimeStamp() -> Int{
-    let secondsFromGmt = TimeZone.autoupdatingCurrent.secondsFromGMT()
-    let timestamp  = Int(Date().timeIntervalSince1970)
-    return timestamp - secondsFromGmt
-  }
   
   func getDeviceName() -> String {
     var systemInfo = utsname()

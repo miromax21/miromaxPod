@@ -9,30 +9,30 @@
 /* Begin PBXBuildFile section */
 		CD3E5E9428041C7600A9B712 /* EventSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD3E5E9328041C7600A9B712 /* EventSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */; };
+		CD7BF1FA283246AE00D84B48 /* extention.Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BF1F9283246AE00D84B48 /* extention.Date.swift */; };
 		CD800F5C28059E78007EB8D2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F5B28059E78007EB8D2 /* Event.swift */; };
 		CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */; };
 		CD800F622806B6A1007EB8D2 /* QueryKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F612806B6A1007EB8D2 /* QueryKeys.swift */; };
-		CD800F642806B6F3007EB8D2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F632806B6F3007EB8D2 /* Utils.swift */; };
+		CD800F642806B6F3007EB8D2 /* DeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F632806B6F3007EB8D2 /* DeviceData.swift */; };
 		CD800F662806D1A1007EB8D2 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F652806D1A1007EB8D2 /* RequestService.swift */; };
 		CD800F692806EA0A007EB8D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F682806EA0A007EB8D2 /* Configuration.swift */; };
 		CD800F6B2806FAE8007EB8D2 /* ModelEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */; };
 		CDA9D180281A7A380021A799 /* extension.NSLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D17F281A7A380021A799 /* extension.NSLock.swift */; };
-		CDB0ED56282555F000B42744 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0ED55282555F000B42744 /* Identity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CD3E5E9028041C7600A9B712 /* EventSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EventSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3E5E9328041C7600A9B712 /* EventSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSDK.h; sourceTree = "<group>"; };
 		CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSDK.swift; sourceTree = "<group>"; };
+		CD7BF1F9283246AE00D84B48 /* extention.Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extention.Date.swift; sourceTree = "<group>"; };
 		CD800F5B28059E78007EB8D2 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPackageData.swift; sourceTree = "<group>"; };
 		CD800F612806B6A1007EB8D2 /* QueryKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryKeys.swift; sourceTree = "<group>"; };
-		CD800F632806B6F3007EB8D2 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		CD800F632806B6F3007EB8D2 /* DeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceData.swift; sourceTree = "<group>"; };
 		CD800F652806D1A1007EB8D2 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		CD800F682806EA0A007EB8D2 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelEnums.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CDA9D17F281A7A380021A799 /* extension.NSLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.NSLock.swift; sourceTree = "<group>"; };
-		CDB0ED55282555F000B42744 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 				CD3E5E9328041C7600A9B712 /* EventSDK.h */,
 				CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */,
 				CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */,
-				CD800F632806B6F3007EB8D2 /* Utils.swift */,
+				CD800F632806B6F3007EB8D2 /* DeviceData.swift */,
 				CD800F652806D1A1007EB8D2 /* RequestService.swift */,
 			);
 			path = Sources;
@@ -83,7 +83,6 @@
 				CD800F5B28059E78007EB8D2 /* Event.swift */,
 				CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */,
 				CD800F612806B6A1007EB8D2 /* QueryKeys.swift */,
-				CDB0ED55282555F000B42744 /* Identity.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -92,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA9D17F281A7A380021A799 /* extension.NSLock.swift */,
+				CD7BF1F9283246AE00D84B48 /* extention.Date.swift */,
 			);
 			path = extentions;
 			sourceTree = "<group>";
@@ -176,14 +176,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD800F642806B6F3007EB8D2 /* Utils.swift in Sources */,
+				CD800F642806B6F3007EB8D2 /* DeviceData.swift in Sources */,
 				CD800F5C28059E78007EB8D2 /* Event.swift in Sources */,
 				CD800F692806EA0A007EB8D2 /* Configuration.swift in Sources */,
+				CD7BF1FA283246AE00D84B48 /* extention.Date.swift in Sources */,
 				CD800F662806D1A1007EB8D2 /* RequestService.swift in Sources */,
 				CD800F6B2806FAE8007EB8D2 /* ModelEnums.swift in Sources */,
 				CDA9D180281A7A380021A799 /* extension.NSLock.swift in Sources */,
 				CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */,
-				CDB0ED56282555F000B42744 /* Identity.swift in Sources */,
 				CD800F622806B6A1007EB8D2 /* QueryKeys.swift in Sources */,
 				CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */,
 			);
