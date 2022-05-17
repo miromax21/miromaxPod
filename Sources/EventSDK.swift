@@ -13,24 +13,8 @@ public protocol EventFactoryProtocol{
 
 public final class EventSDK: EventFactoryProtocol {
   
-  private lazy var baseQueryItems: [[String: Any?]] = {
-    let depaultPackage = DefaultPackageData()
-    return depaultPackage.initBaseQuery(join: clientConfiguration.toQuery())
-  }()
-  
-  private let lock = NSRecursiveLock()
-  
+  private let sendService: SendService!
   private var timer: Timer?
-  
-  /// A list of plugins.
-  /// e.g. for logging, network activity indicator or credentials.
-  public let plugins: [PluginType]!
-  
-  /// User configuration object
-  public let clientConfiguration: ConfigurationType!
-  
-  /// A list of events that, for whatever reason, were not sent
-  public private(set) var sendingQueue: [Event] = []
   
   /// Creates a new EventFactory
   ///
@@ -42,10 +26,21 @@ public final class EventSDK: EventFactoryProtocol {
     configuration: ConfigurationType,
     plugins: [PluginType] = []
   ) {
-    self.clientConfiguration = configuration
-    self.plugins = plugins
+    self.sendService = SendService(configuration: configuration, plugins: plugins)
+    start(heartbeatInterval: configuration.heartbeatInterval)
+  }
+  
+  /// Send next event to the server immediately
+  /// - Parameters:
+  ///   - event: An Event type object for sending on servert
+  public func next(_ event: Event){
+    sendService.sendNext(event: event)
+  }
+  
+  private func start(heartbeatInterval: Double){
+    next(Event(contactType: .undefined))
     self.timer = Timer.scheduledTimer(
-      timeInterval: configuration.heartbeatInterval,
+      timeInterval: heartbeatInterval,
       target: self,
       selector: #selector(sendHeartbeat),
       userInfo: nil,
@@ -53,64 +48,18 @@ public final class EventSDK: EventFactoryProtocol {
     )
   }
   
-  /// Send next event to the server immediately
-  /// - Parameters:
-  ///   - event: An Event type object for sending on servert
-  public func next( _ event: Event){
-    sendNext(event: event)
-    if !sendingQueue.isEmpty{
-      sendingQueue.forEach{
-        sendNext(event: $0, fromQueue: true)
-      }
-    }
+  @objc private func sendHeartbeat() {
+    let event = Event(contactType: .undefined, view: .heartBeat)
+    next(event)
   }
 }
 
-extension EventSDK{
-  private func sendNext(event: Event, fromQueue: Bool = false){
-    let nextQueryDictionary = extendQuery(join: event.toQuery())
-    sendData(query: nextQueryDictionary) { [weak self] success in
-      guard !success && fromQueue || !fromQueue && success else {
-        return
-      }
-      self?.applyEventSending(event: event, success && fromQueue)
-    }
+public extension EventSDK {
+  var sendingQueue: [Event] {
+      return sendService.sendingQueue
   }
   
-  private func applyEventSending(event: Event, _ success: Bool){
-    lock.with { [weak self] in
-      guard let self = self else { return }
-      if success {
-        self.sendingQueue = self.sendingQueue.filter{$0 == event}
-      } else {
-        self.sendingQueue.append(event)
-      }
-    }
-  }
-
-  private func sendData(query: [[String: Any?]], completion: Action? = nil) {
-    
-    let service = RequestService(plugins: self.plugins)
-    var urlComponents = clientConfiguration.urlComponents
-    urlComponents?.queryItems = clientConfiguration.mapQuery(query:  query)
-    
-    guard let url = urlComponents?.url else {
-      return
-    }
-    service.sendRequest(request: URLRequest(url: url)) { success in
-      completion?(success)
-    }
-  }
-  
-  private func extendQuery(join with: [[String: Any?]] ) -> [[String: Any?]]{
-    var query = baseQueryItems
-    query = query + with
-    query.append([QueryKeys.tsc.rawValue: String(describing: Date().getCurrentTimeStamp())])
-    return query
-  }
-  
-  @objc private func sendHeartbeat() {
-    let event = Event(contactType: .undefined, view: .heartBeat)
-    sendNext(event: event)
+  var userAttributes:  [[String: Any?]] {
+    return sendService.baseQueryItems
   }
 }

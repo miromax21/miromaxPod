@@ -13,7 +13,7 @@ public struct Event: Equatable {
   
   /// Event Initializer.
   public init(
-              contactType : ContactType!,
+    contactType : ContactType! = .undefined,
               view: EventType? = nil,
               idlc: String? = nil,
               fts: Int64? = nil,
@@ -33,13 +33,13 @@ public struct Event: Equatable {
   }
   
   /// Content ID within the local directory
-  var idlc: String!
+  var idlc: String? = nil
   
   /// event type
-  var view: EventType!
+  var view: EventType? = nil
   
   /// Type of contact.
-  var type : ContactType!
+  var type : ContactType! = .undefined
   
   /// Timestamp of the stream frame.
   /// For live broadcasts (TV broadcasts, blogger streams, etc.) corresponds to the frame broadcast time, for VOD and catch-up broadcasts - offset from the beginning of the EC in milliseconds.

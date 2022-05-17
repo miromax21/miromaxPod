@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CD3E5E9428041C7600A9B712 /* EventSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD3E5E9328041C7600A9B712 /* EventSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */; };
+		CD5BE7A52833ACFF00BE743C /* SendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5BE7A42833ACFF00BE743C /* SendService.swift */; };
 		CD7BF1FA283246AE00D84B48 /* extention.Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BF1F9283246AE00D84B48 /* extention.Date.swift */; };
 		CD800F5C28059E78007EB8D2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F5B28059E78007EB8D2 /* Event.swift */; };
 		CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */; };
@@ -24,6 +25,7 @@
 		CD3E5E9028041C7600A9B712 /* EventSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EventSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3E5E9328041C7600A9B712 /* EventSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSDK.h; sourceTree = "<group>"; };
 		CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSDK.swift; sourceTree = "<group>"; };
+		CD5BE7A42833ACFF00BE743C /* SendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendService.swift; sourceTree = "<group>"; };
 		CD7BF1F9283246AE00D84B48 /* extention.Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extention.Date.swift; sourceTree = "<group>"; };
 		CD800F5B28059E78007EB8D2 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPackageData.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */,
 				CD800F632806B6F3007EB8D2 /* DeviceData.swift */,
 				CD800F652806D1A1007EB8D2 /* RequestService.swift */,
+				CD5BE7A42833ACFF00BE743C /* SendService.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				CD800F662806D1A1007EB8D2 /* RequestService.swift in Sources */,
 				CD800F6B2806FAE8007EB8D2 /* ModelEnums.swift in Sources */,
 				CDA9D180281A7A380021A799 /* extension.NSLock.swift in Sources */,
+				CD5BE7A52833ACFF00BE743C /* SendService.swift in Sources */,
 				CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */,
 				CD800F622806B6A1007EB8D2 /* QueryKeys.swift in Sources */,
 				CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */,

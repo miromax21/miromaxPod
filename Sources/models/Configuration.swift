@@ -44,19 +44,19 @@ public protocol ConfigurationType: AnyObject {
 extension ConfigurationType {
   
   public var heartbeatInterval: Double {
-    get {
       return 30.0
-    }
+  }
+  
+  public var sendingQueueBufferSize: Int {
+      return 1000
   }
   
   public var urlComponents: URLComponents! {
-    get {
       var urlComponents = URLComponents()
       urlComponents.scheme = "https"
       urlComponents.host = "tns-counter.ru"
       urlComponents.path = "/e/msdkec01"
       return urlComponents
-    }
   }
   
   public func toQuery() -> [[String: Any?]] {
