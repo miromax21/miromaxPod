@@ -12,50 +12,73 @@ import UIKit
 public struct Event: Equatable {
   
   /// Event Initializer.
-  public init(cuId: String,
-              view: EventType!,
+  public init(
               contactType : ContactType!,
-              frameTs: Int64? = nil,
-              cuUrl: String?   = nil,
+              view: EventType? = nil,
+              idlc: String? = nil,
+              fts: Int64? = nil,
+              urlc: String?   = nil,
               media: String? = nil,
-              tmsec: String? = nil,
-              cuVer: Int?  = nil) {
-    self.cuId = cuId
+              tms: String? = nil,
+              ver: Int?  = nil) {
+    self.idlc = idlc
     self.view = view
-    self.contactType = contactType
-    self.frameTs = frameTs
-    self.cuUrl = cuUrl
+    self.type = contactType
+    self.fts = fts
+    self.urlc = urlc
     self.media = media
-    self.tmsec = tmsec
-    self.cuVer = cuVer
+    self.tms = tms
+    self.ver = ver
+    self.tsu = Date().getCurrentTimeStamp()
   }
   
   /// Content ID within the local directory
-  var cuId: String!
+  var idlc: String!
   
   /// event type
   var view: EventType!
   
   /// Type of contact.
-  var contactType : ContactType!
+  var type : ContactType!
   
   /// Timestamp of the stream frame.
   /// For live broadcasts (TV broadcasts, blogger streams, etc.) corresponds to the frame broadcast time, for VOD and catch-up broadcasts - offset from the beginning of the EC in milliseconds.
   /// Transmitted in heartbeat integrations.
-  var frameTs: Int64? = nil
+  var fts: Int64? = nil
   
   /// Content unit url
   /// If not passed, it is cast to the canon address based on the field (http_referer)
-  var cuUrl: String? = nil
+  var urlc: String? = nil
   
   /// The name in the directory of the channel partner or other media in which the EC is contacted
   /// The value must be encoded encodeURIComponent
   var media: String? = nil
   
   /// The ID of the thematic section.  Assigned by Mediascope
-  var tmsec: String? = nil
+  var tms: String? = nil
   
   ///The version number of the EC. Versions may differ in the content of the EC
-  var cuVer: Int?  = nil
+  var ver: Int?  = nil
+  
+  /// The local timestamp of the curretn event
+  private(set) var tsu: Int = 0
+  
+  
+  /// Request `URLQueryItem` configuration
+  /// Map self to  `[URLQueryItem: Value]` for  `QueryItems`
+  func toQuery() -> [[String: Any?]] {
+    typealias Keys = QueryKeys
+    return [
+      [Keys.type.rawValue : type],
+      [Keys.tsu.rawValue : tsu],
+      [Keys.fts.rawValue : fts],
+      [Keys.media.rawValue : media],
+      [Keys.urlc.rawValue : urlc],
+      [Keys.tms.rawValue : tms],
+      [Keys.ver.rawValue : ver],
+      [Keys.idlc.rawValue : idlc],
+      [Keys.view.rawValue : view],
+    ]
+  }
   
 }

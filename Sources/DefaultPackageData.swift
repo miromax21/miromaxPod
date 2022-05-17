@@ -13,29 +13,26 @@ final class DefaultPackageData {
       return "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
   }
   
-  private lazy var queryDictionary: [[QueryKeys: Any?]] = {
-    let device = DeviceUtils.shared
+  private lazy var queryDictionary: [[String: Any]] = {
+    let device = DeviceData()
+    typealias Keys = QueryKeys
     return [
-      [.deviceInterface: DefaultQueryKeysValues.deviceIdentity.rawValue],
-      [.deviceIdType : device.identity.id],
-      [.deviceModel : device.getDeviceName()],
-      [.deviceMNFC : DefaultQueryKeysValues.deviceMNFC.rawValue],
-      [.appVersion : getBundleData(for: "CFBundleShortVersionString")],
-      [.deviceType : device.identity.type],
-      [.sessionId : device.uuid],
-      [.timeInit : device.getCurrentTimeStamp],
-      [.uidClass : Int(DefaultQueryKeysValues.uidClass.rawValue) ?? 0],
-      [.uidType : ""],
-      [.appName : getBundleData(for: "CFBundleName")],
-      [.osInfo : "ios \(osVersion)"],
+      [Keys.dvi.rawValue: device.identity],
+      [Keys.dvm.rawValue : device.getDeviceName()],
+      [Keys.dvn.rawValue : "apple"],
+      [Keys.appv.rawValue : getBundleData(for: "CFBundleShortVersionString") ?? ""],
+      [Keys.sid.rawValue : device.uuid],
+      [Keys.appn.rawValue : getBundleData(for: "CFBundleName") ?? ""],
+      [Keys.os.rawValue : "ios \(osVersion)"],
+      [Keys.typ.rawValue : "2"]
     ]
   }()
   
-  func initBaseQuery(join with: [[QueryKeys: Any?]] ) -> [[QueryKeys: Any?]]{
+  func initBaseQuery(join with: [[String: Any?]] ) -> [[String: Any?]]{
     var query = queryDictionary
-    with.forEach{
-      query.append($0)
-    }
+    with
+      .filter{ $0.values.first != nil  }
+      .forEach{ query.append($0 as [String : Any])  }
     return query
   }
   

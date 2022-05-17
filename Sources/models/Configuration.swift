@@ -13,30 +13,70 @@ public protocol ConfigurationType: AnyObject {
   
   /// CatID - the ID of the local directory of the EC on the site where this EC is recorded.
   /// Assigned by Mediascope.
-  var catId: Int! {get}
+  var idc: Int! {get}
   
   /// User/device ID
-  var uid: String! {get}
+  var uidc: String! {get}
   
+  ///Application/user install ID (technical)
+  var uid: String {get}
+
   /// Identifier linked to the user's account in the Owner's system
-  var hardId: String! {get}
+  var hid: String? {get}
   
   /// Client ID.
   /// Assigned by Mediascope
-  var partnerName: String! {get}
+  var cid: String! {get}
+  
+  /// Request `URLComponents` configuration
+  /// URLComponents based structure to configure the base part of the target URL
+  var urlComponents: URLComponents! {get}
+  
+  /// Request `URLQueryItem` configuration
+  /// Map self to  `[URLQueryItem: Value]` for  `baseQueryItems` configuration
+  func toQuery() -> [[String: Any?]]
+  
+  /// Request `URLQueryItem` configuration
+  /// Map dictionary of data to `[URLQueryItem]` for request to server
+  func mapQuery(query: [[String: Any?]]) -> [URLQueryItem]
 }
 
 extension ConfigurationType {
   
-  /// Request Configuration
-  /// URLComponents based structure to configure the base part of the target URL
+  public var heartbeatInterval: Double {
+    get {
+      return 30.0
+    }
+  }
+  
   public var urlComponents: URLComponents! {
     get {
       var urlComponents = URLComponents()
       urlComponents.scheme = "https"
       urlComponents.host = "tns-counter.ru"
-      urlComponents.path = "e/msdkec01"
+      urlComponents.path = "/e/msdkec01"
       return urlComponents
     }
+  }
+  
+  public func toQuery() -> [[String: Any?]] {
+    typealias Keys = QueryKeys
+    return [
+      [Keys.cid.rawValue : cid],
+      [Keys.hid.rawValue : hid],
+      [Keys.uidc.rawValue : uidc],
+      [Keys.idc.rawValue : idc],
+      [Keys.uid.rawValue: uid],
+    ]
+  }
+  
+  public func mapQuery(query: [[String: Any?]]) -> [URLQueryItem]{
+    let queryItems: [URLQueryItem?] = query.compactMap {
+      if let key = $0.keys.first, let value = $0.values.first{
+        return URLQueryItem(name: key, value: String(describing: value!))
+      }
+      return nil
+    }
+    return queryItems.compactMap{$0}
   }
 }
