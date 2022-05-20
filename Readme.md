@@ -64,7 +64,7 @@ the returned values extend the default url configuration elements
 ```
 
 ##### map sending url query items
-before `first sending` you can Modify the query items in Request:
+> you can modify the elements of the request before you send it for the `first time`:=
 
 - check
 - filtering
@@ -85,12 +85,11 @@ before `first sending` you can Modify the query items in Request:
 ```
 
 ## Events Sending
-all keyses
+> You can see more Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
 ```swift
   let event = Event(contactType: .undefined, view: .start)
   eventSdk.next(event)
 ```
-#### [All keyses](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift).
 
 ### SendingQueue
 ```swift
