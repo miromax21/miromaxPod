@@ -11,6 +11,7 @@
 		CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */; };
 		CD5BE7A52833ACFF00BE743C /* SendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5BE7A42833ACFF00BE743C /* SendService.swift */; };
 		CD5BE7A72834DF5100BE743C /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5BE7A62834DF5100BE743C /* RingBuffer.swift */; };
+		CD5BE7A92837985900BE743C /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = CD5BE7A82837985900BE743C /* Readme.md */; };
 		CD7BF1FA283246AE00D84B48 /* extention.Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BF1F9283246AE00D84B48 /* extention.Date.swift */; };
 		CD800F5C28059E78007EB8D2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F5B28059E78007EB8D2 /* Event.swift */; };
 		CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */; };
@@ -28,6 +29,7 @@
 		CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSDK.swift; sourceTree = "<group>"; };
 		CD5BE7A42833ACFF00BE743C /* SendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendService.swift; sourceTree = "<group>"; };
 		CD5BE7A62834DF5100BE743C /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
+		CD5BE7A82837985900BE743C /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		CD7BF1F9283246AE00D84B48 /* extention.Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extention.Date.swift; sourceTree = "<group>"; };
 		CD800F5B28059E78007EB8D2 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPackageData.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 		CD3E5E8628041C7600A9B712 = {
 			isa = PBXGroup;
 			children = (
+				CD5BE7A82837985900BE743C /* Readme.md */,
 				CD3E5E9228041C7600A9B712 /* Sources */,
 				CD3E5E9128041C7600A9B712 /* Products */,
 			);
@@ -172,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5BE7A92837985900BE743C /* Readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
