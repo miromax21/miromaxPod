@@ -8,7 +8,7 @@
 import Foundation
 import CoreVideo
 import UIKit
-public typealias Action = (_ success: Bool) -> ()
+public typealias Action = (_ success: Bool,_ query: String) -> ()
 public protocol PluginType {
   /// Called to modify a request before sending.
   func prepare(_ request: URLRequest) -> URLRequest
@@ -22,7 +22,7 @@ struct RequestService {
     self.plugins = plugins
   }
   
-  func sendRequest(request: URLRequest, completion: @escaping Action){
+  func sendRequest(request: URLRequest, completion: @escaping (_ success: Bool) -> ()){
     var currentRequest = request
     let urlSession = URLSessionApiSrevices()
     if !plugins.isEmpty {
@@ -41,8 +41,6 @@ struct URLSessionApiSrevices {
   var error : String?
   
   private var urlSession: URLSession
-  
-  fileprivate let cache = URLCache.shared
   
   public init(config:URLSessionConfiguration = .default) {
     self.urlSession = URLSession(configuration: config)

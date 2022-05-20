@@ -9,12 +9,25 @@ import Foundation
 
 public protocol EventFactoryProtocol{
   func next( _ event: Event)
+  var sendingIsAvailable: Bool {get set}
 }
 
 public final class EventSDK: EventFactoryProtocol {
   
   private let sendService: SendService!
   private var timer: Timer?
+  /// Data sending ability trigger
+  /// # Notes: #
+  /// 1.  case `false`current  request will be add into  sendingQueue
+  /// 2. case `true` will try send current request and one by one request from queue while it won't be empty
+  public var sendingIsAvailable: Bool = true{
+    didSet{
+      sendService.sendingIsAvailable = sendingIsAvailable
+      if sendingIsAvailable {
+        sendService.sendFromQueue()
+      }
+    }
+  }
   
   /// Creates a new EventFactory
   ///
@@ -55,8 +68,8 @@ public final class EventSDK: EventFactoryProtocol {
 }
 
 public extension EventSDK {
-  var sendingQueue: [Event] {
-      return sendService.sendingQueue
+  var sendingQueue: [String?] {
+    return sendService.sendingQueue.state
   }
   
   var userAttributes:  [[String: Any?]] {

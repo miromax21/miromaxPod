@@ -2,7 +2,7 @@
 //  extention.NSLock.swift
 //  EventSDK
 //
-//  Created by Sergey Zhidkov on 28.04.2022.
+//  Created by Maksim Mironov on 28.04.2022.
 //
 
 import Foundation

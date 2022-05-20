@@ -2,7 +2,7 @@
 //  extention.Date.swift
 //  EventSDK
 //
-//  Created by Sergey Zhidkov on 16.05.2022.
+//  Created by Maksim Mironov on 16.05.2022.
 //
 
 import Foundation

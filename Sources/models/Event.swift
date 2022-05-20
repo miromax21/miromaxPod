@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /// user Event object
-public struct Event: Equatable {
+public struct Event: Equatable, Hashable {
   
   /// Event Initializer.
   public init(
@@ -72,8 +72,8 @@ public struct Event: Equatable {
       [Keys.type.rawValue : type],
       [Keys.tsu.rawValue : tsu],
       [Keys.fts.rawValue : fts],
-      [Keys.media.rawValue : media],
-      [Keys.urlc.rawValue : urlc],
+      [Keys.media.rawValue : String(describing: media?.cString(using: .utf8))],
+      [Keys.urlc.rawValue : String(describing: urlc?.cString(using: .utf8))],
       [Keys.tms.rawValue : tms],
       [Keys.ver.rawValue : ver],
       [Keys.idlc.rawValue : idlc],

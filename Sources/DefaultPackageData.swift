@@ -17,14 +17,14 @@ final class DefaultPackageData {
     let device = DeviceData()
     typealias Keys = QueryKeys
     return [
-      [Keys.dvi.rawValue: device.identity],
-      [Keys.dvm.rawValue : device.getDeviceName()],
-      [Keys.dvn.rawValue : "apple"],
-      [Keys.appv.rawValue : getBundleData(for: "CFBundleShortVersionString") ?? ""],
-      [Keys.sid.rawValue : device.uuid],
-      [Keys.appn.rawValue : getBundleData(for: "CFBundleName") ?? ""],
-      [Keys.os.rawValue : "ios \(osVersion)"],
-      [Keys.typ.rawValue : "2"]
+      [Keys.os.rawValue : "ios \(osVersion)".cString(using: .utf8)!],
+      [Keys.sid.rawValue  : device.uuid],
+      [Keys.dvi.rawValue  : device.identity],
+      [Keys.typ.rawValue  : "2"],
+      [Keys.dvm.rawValue  : String(describing: device.getDeviceName().cString(using: .utf8))],
+      [Keys.dvn.rawValue  : "apple"],
+      [Keys.appv.rawValue   : getBundleData(for: "CFBundleShortVersionString") ?? ""],
+      [Keys.appn.rawValue   : String(describing: (getBundleData(for: "CFBundleName") as String?)?.cString(using: .utf8))],
     ]
   }()
   
