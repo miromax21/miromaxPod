@@ -98,15 +98,14 @@ all keyses
   // eventSdk.sendingQueue -> [String?]
 ```
 #### Warning
-> if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue)  you have check the availability of the Internet connection yourself
+> if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) 
 
 ```swift 
   var sendingIsAvailable: Bool
   // eventSdk.sendingIsAvailable = false 
 ```
-  if `true`, the request from [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) will try resume
-  otherwise requests will be suspended
-  and resumed again if set `true`
+> you have to check the Internet connection yourself and update current state
+> if true, then the requests from the [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) will try to resume, otherwise the sending of pending requests will be suspended
   
 ### Prepare request
 ```swift
