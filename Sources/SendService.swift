@@ -2,7 +2,7 @@
 //  SendService.swift
 //  EventSDK
 //
-//  Created by Sergey Zhidkov on 17.05.2022.
+//  Created by Maksim Mironov on 17.05.2022.
 //
 
 import Foundation
@@ -13,11 +13,13 @@ final class SendService {
     return depaultPackage.initBaseQuery(join: clientConfiguration.toQuery())
   }()
   
-  var sendingQueue: [Event] = []
   
+  var sendingQueue: RingBuffer<String>!
+  var sendingIsAvailable: Bool = true
   private let lock = NSRecursiveLock()
   private let clientConfiguration: ConfigurationType!
   private let plugins: [PluginType]!
+  private var timer: Timer?
   
   init(
     configuration: ConfigurationType,
@@ -25,51 +27,68 @@ final class SendService {
   ) {
     self.clientConfiguration = configuration
     self.plugins = plugins
+    self.sendingQueue = RingBuffer(count: clientConfiguration.sendingQueueBufferSize)
   }
   
-  func sendNext(event: Event, fromQueue: Bool = false){
+  func sendNext(event: Event){
     let nextQueryDictionary = extendQuery(join: event.toQuery())
-    sendData(query: nextQueryDictionary) { [weak self] success in
-      guard !success && fromQueue || !fromQueue && success else {
-        return
-      }
-      self?.applyEventSending(event: event, success && fromQueue)
+    let queryItems = clientConfiguration.mapQuery(query: nextQueryDictionary)
+    var urlComponents = clientConfiguration.urlComponents
+    urlComponents?.queryItems = queryItems
+    guard let stringUrl = urlComponents?.url?.absoluteString else {
+      return
     }
-  }
-  
-  private func applyEventSending(event: Event, _ success: Bool){
-    lock.with { [weak self] in
-      guard let self = self else { return }
-      if success {
-        self.sendingQueue = self.sendingQueue.filter{$0 == event}
-      } else {
-        self.sendingQueue.append(event)
+    guard sendingIsAvailable else{
+      write(url: stringUrl)
+      return
+    }
+    sendEvent(url: stringUrl) { [weak self] success, url in
+      if !success {
+        self?.write(url: url)
       }
     }
   }
   
   private func intsert(event: Event){
-    
-  }
 
-  private func sendData(query: [[String: Any?]], completion: Action? = nil) {
-    
-    let service = RequestService(plugins: self.plugins)
-    var urlComponents = clientConfiguration.urlComponents
-    urlComponents?.queryItems = clientConfiguration.mapQuery(query:  query)
-    
-    guard let url = urlComponents?.url else {
-      return
+  }
+  
+  func sendFromQueue(){
+    while sendingIsAvailable && !sendingQueue.isEmpty {
+      lock.with { [weak self] in
+      
+        guard
+          let target = sendingQueue.read(),
+          let url = target.item
+        else {
+          return
+        }
+        sendEvent(url: url) { [weak self] success, query in
+          self?.sendingQueue.clear(atIndex: target.at)
+        }
+        
+      }
     }
-    service.sendRequest(request: URLRequest(url: url)) { success in
-      completion?(success)
+  }
+  
+  private func write(url:String){
+    lock.with { [weak self] in
+      self?.sendingQueue.write(url)
+    }
+  }
+  
+  private func sendEvent(url: String, completion: Action? = nil) {
+    let service = RequestService(plugins: self.plugins)
+    let nextUrl = url + "&\(QueryKeys.tsc.rawValue)=\(Date().getCurrentTimeStamp())"
+  
+    service.sendRequest(request: URLRequest(url: URL(string: nextUrl)!)) { success in
+      completion?(success, url)
     }
   }
   
   private func extendQuery(join with: [[String: Any?]] ) -> [[String: Any?]]{
     var query = baseQueryItems
     query = query + with
-    query.append([QueryKeys.tsc.rawValue: String(describing: Date().getCurrentTimeStamp())])
     return query
   }
 }
