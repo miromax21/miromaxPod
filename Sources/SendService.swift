@@ -49,10 +49,6 @@ final class SendService {
     }
   }
   
-  private func intsert(event: Event){
-
-  }
-  
   func sendFromQueue(){
     while sendingIsAvailable && !sendingQueue.isEmpty {
       lock.with { [weak self] in
