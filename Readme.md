@@ -30,48 +30,52 @@ import the framework with `import EventSDK`.
 
 You have to create configuration *class* 
 The configuration *must* additionally conform `ConfigurationType` protocol
-
-### Customize your default configuration
-
-##### custom URLComponents (base implementation)
-###### Warning
-  don't foget '/' in host trailing or path leading otherwise Request will be failed
 ```swift
-  var urlComponents: URLComponents! {
-    var urlComponents = URLComponents()
-    urlComponents.scheme = "https"
-    urlComponents.host = "domain" 
-    urlComponents.path = "/path" // **important** use '/'
-    return urlComponents
+  final class sdkConfiguration: ConfigurationType {
+    // ConfigurationType implementation
   }
 ```
+### Customize your default configuration:
 
-##### toQuery()
-the returned values extend the default url configuration elements
-```swift
-  func toQuery() -> [[String: Any?]] {}
-```
+##### - urlComponents (base implementation):
+  ```swift
+    var urlComponents: URLComponents! {
+      var urlComponents = URLComponents()
+      urlComponents.scheme = "https"
+      urlComponents.host = "domain" 
+      urlComponents.path = "/path" // **important** use '/'
+      return urlComponents
+    }
+  ```
+  > don't foget '/' in host trailing or path leading otherwise Request will be failed
 
-##### map sending url query items
-> you can modify the elements of the request before you send it for the `first time`:
-```swift
-   func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
-```
+##### - toQuery()
+  map current configuration to Dictionary<String, Any?>
+  for extending the default url configuration elements
+  ```swift
+    func toQuery() -> [[String: Any?]] {}
+  ```
 
- - [x] check
- - [x] filtering
- - [x] append query items
+##### - mapQuery map sending url query items
+  > you can modify query items of the url before you send request at the `first time`:
+  ```swift
+     func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
+  ```
+
+   - [x] check
+   - [x] filtering
+   - [x] append query items
 
 
 ## Build
 ```swift
   let eventSdk = EventSDK(configuration: config)
 ```
-#### check Configuration
-```swift
-  var userAttributes:  [[String: Any?]]
-  // eventSdk.userAttributes -> [[String: Any?]] 
-```
+#### - check Configuration
+  ```swift
+    var userAttributes:  [[String: Any?]]
+    // eventSdk.userAttributes -> [[String: Any?]] 
+  ```
 
 ## Events Sending
 > You can see more Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
@@ -80,21 +84,20 @@ the returned values extend the default url configuration elements
   eventSdk.next(event)
 ```
 
-### SendingQueue
-```swift
-  var sendingQueue: [String?]
-  // eventSdk.sendingQueue -> [String?]
-```
-#### Warning
-> if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) 
+### - SendingQueue
+  ```swift
+    var sendingQueue: [String?]
+    // eventSdk.sendingQueue -> [String?]
+  ```
+  #### Warning
+  > if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) 
 
-```swift 
-  var sendingIsAvailable: Bool
-  // eventSdk.sendingIsAvailable = false 
-```
-> you have to check the Internet connection yourself and update current state
-> if true, then the requests from the [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) will try to resume, otherwise the sending of pending requests will be suspended
-  
+  ```swift 
+    var sendingIsAvailable: Bool
+  ```
+
+  > After the internet connection is restored  the requests from the [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) will try to resume, otherwise the sending of pending requests will be suspended
+
 ### Prepare request
 ```swift
   // MARK: - PluginType Implementation
