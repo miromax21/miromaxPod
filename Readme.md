@@ -1,6 +1,3 @@
-<p align="center">
-  <img height="160" src="web/logo_github.png" />
-</p>
 
 # MiromaxPod
 
@@ -64,7 +61,7 @@ the returned values extend the default url configuration elements
 ```
 
 ##### map sending url query items
-> you can modify the elements of the request before you send it for the `first time`:=
+> you can modify the elements of the request before you send it for the `first time`:
 
 - check
 - filtering
