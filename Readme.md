@@ -26,10 +26,20 @@ let package = Package(
 Use the following entry in your Podfile:
 
 ```rb
-pod 'EventSDK', 'version'
+pod 'EventSDK'
 ```
 
-Then run `pod install`.
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. 
+
+Once you have your Swift package set up, adding Alamofire as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/miromax21/miromaxPod.git", .upToNextMajor(from: "0.1.1"))
+]
+```
 
 In any file you'd like to use EventSDK in, don't forget to
 import the framework with `import EventSDK`.
@@ -61,15 +71,16 @@ the returned values extend the default url configuration elements
 ```
 
 ##### map sending url query items
-> you can modify the elements of the request before you send it for the `first time`:
-
-- check
-- filtering
-- append query items
-
 ```swift
    func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
 ```
+> you can modify the elements of the request before you send it for the `first time`:
+
+> - [x] check
+> - [x] filtering
+> - [x] append query items
+
+
 
 ## Build
 ```swift
