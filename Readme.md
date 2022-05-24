@@ -2,24 +2,6 @@
 # MiromaxPod
 
 ## Installation
-```swift
-import PackageDescription
-
-let package = Package(
-    name: "MyPackage",
-    products: [
-        .library(
-            name: "MyPackage",
-            targets: ["MyPackage"]),
-    ],
-    dependencies: [
-        .package(url: "https://github.com/miromax21/miromaxPod.git")
-    ],
-    targets: [
-        .target(name: "MyPackage")
-    ]
-)
-```
 
 ### CocoaPods
 
@@ -33,7 +15,7 @@ pod 'EventSDK'
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. 
 
-Once you have your Swift package set up, adding Alamofire as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+Once you have your Swift package set up, adding EventSDK as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
 ```swift
 dependencies: [
@@ -71,15 +53,14 @@ the returned values extend the default url configuration elements
 ```
 
 ##### map sending url query items
+> you can modify the elements of the request before you send it for the `first time`:
 ```swift
    func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
 ```
-> you can modify the elements of the request before you send it for the `first time`:
 
-> - [x] check
-> - [x] filtering
-> - [x] append query items
-
+ - [x] check
+ - [x] filtering
+ - [x] append query items
 
 
 ## Build
