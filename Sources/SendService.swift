@@ -13,7 +13,6 @@ final class SendService {
     return depaultPackage.initBaseQuery(join: clientConfiguration.toQuery())
   }()
   
-  
   var sendingQueue: RingBuffer<String>!
   var sendingIsAvailable: Bool = true
   private let lock = NSRecursiveLock()
@@ -52,7 +51,6 @@ final class SendService {
   func sendFromQueue(){
     while sendingIsAvailable && !sendingQueue.isEmpty {
       lock.with { [weak self] in
-      
         guard
           let target = sendingQueue.read(),
           let url = target.item
@@ -62,7 +60,6 @@ final class SendService {
         sendEvent(url: url) { [weak self] success, query in
           self?.sendingQueue.clear(atIndex: target.at)
         }
-        
       }
     }
   }

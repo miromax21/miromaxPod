@@ -6,24 +6,36 @@
 //
 
 import Foundation
-
+import Network
 public protocol EventFactoryProtocol{
   func next( _ event: Event)
-  var sendingIsAvailable: Bool {get set}
+  var sendingIsAvailable: Bool {get}
 }
 
 public final class EventSDK: EventFactoryProtocol {
   
   private let sendService: SendService!
   private var timer: Timer?
+  private lazy var monitor: NWPathMonitor = {
+    let monitor = NWPathMonitor()
+    monitor.pathUpdateHandler = { [weak self] path in
+        let next = path.status != .unsatisfied
+        if next != self?.sendingIsAvailable {
+          self?.sendingIsAvailable = next
+        }
+    }
+    return monitor
+  }()
+  private var heartbeatInterval: Double = 30.0
+  
   /// Data sending ability trigger
   /// # Notes: #
   /// 1.  case `false`current  request will be add into  sendingQueue
   /// 2. case `true` will try send current request and one by one request from queue while it won't be empty
-  public var sendingIsAvailable: Bool = true{
-    didSet{
-      sendService.sendingIsAvailable = sendingIsAvailable
-      if sendingIsAvailable {
+  public private(set) var sendingIsAvailable: Bool = false  {
+    willSet{
+      sendService.sendingIsAvailable = newValue
+      if newValue {
         sendService.sendFromQueue()
       }
     }
@@ -37,10 +49,13 @@ public final class EventSDK: EventFactoryProtocol {
   ///   - plugins: Called to modify a request before sending.
   public init(
     configuration: ConfigurationType,
-    plugins: [PluginType] = []
+    plugins: [PluginType] = [],
+    queue: DispatchQueue = DispatchQueue(label: "com.tsifrasoft.EventSdkInternetMonitor")
   ) {
     self.sendService = SendService(configuration: configuration, plugins: plugins)
-    start(heartbeatInterval: configuration.heartbeatInterval)
+    self.heartbeatInterval = configuration.heartbeatInterval
+    start(heartbeatInterval: heartbeatInterval)
+    monitor.start(queue: queue)
   }
   
   /// Send next event to the server immediately
@@ -62,8 +77,13 @@ public final class EventSDK: EventFactoryProtocol {
   }
   
   @objc private func sendHeartbeat() {
+    guard sendingIsAvailable else {return}
     let event = Event(contactType: .undefined, view: .heartBeat)
     next(event)
+  }
+  
+  deinit{
+    monitor.cancel()
   }
 }
 

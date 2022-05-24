@@ -55,7 +55,7 @@ extension ConfigurationType {
       var urlComponents = URLComponents()
       urlComponents.scheme = "https"
       urlComponents.host = "tns-counter.ru"
-      urlComponents.path = "/e/msdkec01"
+      urlComponents.path = "/e/msdkev"
       return urlComponents
   }
   
@@ -72,8 +72,8 @@ extension ConfigurationType {
   
   public func mapQuery(query: [[String: Any?]]) -> [URLQueryItem]{
     let queryItems: [URLQueryItem?] = query.compactMap {
-      if let key = $0.keys.first, let value = $0.values.first{
-        return URLQueryItem(name: key, value: String(describing: value!))
+      if let key = $0.first?.key, let value = $0.first?.value{
+        return URLQueryItem(name: key, value: String(describing: value))
       }
       return nil
     }

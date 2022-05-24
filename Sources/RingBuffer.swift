@@ -38,13 +38,13 @@ public struct RingBuffer<T> {
   
   public mutating func clear(atIndex: Int){
     array[atIndex] = nil
+    increment(target: &readIndex)
   }
 
   public mutating func read() -> BufferTarget? {
     if !isEmpty {
       let nextIndex = readIndex % array.count
       let element = array[nextIndex]
-      increment(target: &readIndex)
       return (item: element, at: nextIndex)
     } else {
       return nil
