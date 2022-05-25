@@ -30,14 +30,25 @@ import the framework with `import EventSDK`.
 
 You have to create configuration *class* 
 The configuration *must* additionally conform `ConfigurationType` protocol
-```swift
-  final class sdkConfiguration: ConfigurationType {
-    // ConfigurationType implementation
-  }
-```
-### Customize your default configuration:
+  ```swift
+    final class SDKConfiguration: ConfigurationType{
 
-##### - urlComponents (base implementation):
+      var cid: String? = "example_com"
+
+      var hid: String? = "27fa89c8-e7af-435d-b0b7-0dd2b17b3fa7"
+      
+      var uidc: String! = "2"
+      
+      var idc: Int?
+      
+      var uid: String?
+      
+    }
+  ```
+### Customize default configuration params:
+The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Configuration.swift)
+> You can override some methods of constructing the url
+- urlComponents (base implementation):
   ```swift
     var urlComponents: URLComponents! {
       var urlComponents = URLComponents()
@@ -49,15 +60,15 @@ The configuration *must* additionally conform `ConfigurationType` protocol
   ```
   > don't foget '/' in host trailing or path leading otherwise Request will be failed
 
-##### - toQuery()
+- toQuery()
   map current configuration to Dictionary<String, Any?>
   for extending the default url configuration elements
   ```swift
     func toQuery() -> [[String: Any?]] {}
   ```
 
-##### - mapQuery map sending url query items
-  > you can modify query items of the url before you send request at the `first time`:
+- mapQuery
+  modify query items of the url before you send request at the `first time`:
   ```swift
      func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
   ```
@@ -103,7 +114,7 @@ The configuration *must* additionally conform `ConfigurationType` protocol
   // MARK: - PluginType Implementation
   struct SDKPlugin :PluginType {
     func prepare(_ request: URLRequest) -> URLRequest {
-      /// some code
+      ///  some request modification code
       return request
     }
   }
