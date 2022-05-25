@@ -7,9 +7,27 @@
 
 import Foundation
 
+public protocol RequestConfiguration: AnyObject  {
+  
+  var heartbeatInterval: Double { get }
+  var sendingQueueBufferSize: Int { get }
+  
+  /// Request `URLComponents` configuration
+  /// URLComponents based structure to configure the base part of the target URL
+  var urlComponents: URLComponents! {get}
+
+  /// Request `URLQueryItem` configuration
+  /// Map self to  `[URLQueryItem: Value]` for  `baseQueryItems` configuration
+  func toQuery() -> [[String: Any?]]
+  
+  /// Request `URLQueryItem` configuration
+  /// Map dictionary of data to `[URLQueryItem]` for request to server
+  func mapQuery(query: [[String: Any?]]) -> [URLQueryItem]
+}
+
 // User configuration object
 // serves to recognize and calculate statistics on the server side
-public protocol ConfigurationType: AnyObject {
+public protocol ConfigurationType: RequestConfiguration {
   
   /// CatID - the ID of the local directory of the EC on the site where this EC is recorded.
   /// Assigned by Mediascope.
@@ -28,17 +46,6 @@ public protocol ConfigurationType: AnyObject {
   /// Assigned by Mediascope
   var cid: String! {get}
   
-  /// Request `URLComponents` configuration
-  /// URLComponents based structure to configure the base part of the target URL
-  var urlComponents: URLComponents! {get}
-  
-  /// Request `URLQueryItem` configuration
-  /// Map self to  `[URLQueryItem: Value]` for  `baseQueryItems` configuration
-  func toQuery() -> [[String: Any?]]
-  
-  /// Request `URLQueryItem` configuration
-  /// Map dictionary of data to `[URLQueryItem]` for request to server
-  func mapQuery(query: [[String: Any?]]) -> [URLQueryItem]
 }
 
 extension ConfigurationType {
