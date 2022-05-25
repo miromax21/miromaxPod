@@ -46,9 +46,9 @@ You have to create configuration with the `ConfigurationType` protocol implement
     }
   ```
 ### Customize default configuration settings:
-The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Configuration.swift)
+The ConfigurationType protocol inherits [RequestConfiguration](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Configuration.swift)
 > You can override some methods of constructing the url
-- urlComponents (base implementation):
+- `urlComponents` (base implementation):
   ```swift
     var urlComponents: URLComponents! {
       var urlComponents = URLComponents()
@@ -60,14 +60,14 @@ The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.
   ```
   > don't foget '/' in host trailing or path leading otherwise Request will be failed
 
-- toQuery()
+- `toQuery()` 
   map current configuration to Dictionary<String, Any?>
   for extending the default url [configuration](https://github.com/miromax21/miromaxPod#check-configuration)  elements
   ```swift
     func toQuery() -> [[String: Any?]] {}
   ```
 
-- mapQuery
+- `mapQuery` 
   modify query items of the url before you send request at the `first time`:
   ```swift
      func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
@@ -95,7 +95,7 @@ The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.
   eventSdk.next(event)
 ```
 
-- Sending availability
+- `Sending availability` 
   if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sending-queue) 
   ```swift 
     var sendingIsAvailable: Bool
@@ -103,7 +103,7 @@ The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.
 
   > After the internet connection is restored  the requests from the [sending queue](https://github.com/miromax21/miromaxPod#sending-queue) will try to resume, otherwise the sending of pending requests will be suspended
   
-- Sending queue
+- `Sending queue`
   ```swift
     var sendingQueue: [String?]
     // eventSdk.sendingQueue -> [String?]
