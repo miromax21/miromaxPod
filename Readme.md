@@ -89,26 +89,26 @@ The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.
   ```
 
 ### Events Sending
-> You can see more Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
+> all Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
 ```swift
   let event = Event(contactType: .undefined, view: .start)
   eventSdk.next(event)
 ```
 
-#### SendingQueue
-  ```swift
-    var sendingQueue: [String?]
-    // eventSdk.sendingQueue -> [String?]
-  ```
-  ##### Warning
-  > if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) 
-
+- Sending availability
+  if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sending-queue) 
   ```swift 
     var sendingIsAvailable: Bool
   ```
 
-  > After the internet connection is restored  the requests from the [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) will try to resume, otherwise the sending of pending requests will be suspended
-
+  > After the internet connection is restored  the requests from the [sending queue](https://github.com/miromax21/miromaxPod#sending-queue) will try to resume, otherwise the sending of pending requests will be suspended
+  
+- Sending queue
+  ```swift
+    var sendingQueue: [String?]
+    // eventSdk.sendingQueue -> [String?]
+  ```
+  
 ### Prepare request
 ```swift
   // MARK: - PluginType Implementation
