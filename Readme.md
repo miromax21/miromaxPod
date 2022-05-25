@@ -28,8 +28,8 @@ import the framework with `import EventSDK`.
 
 ## Usage
 
-You have to create configuration *class* 
-The configuration *must* additionally conform `ConfigurationType` protocol
+You have to create configuration with the `ConfigurationType` protocol implementation
+
   ```swift
     final class SDKConfiguration: ConfigurationType{
 
@@ -45,7 +45,7 @@ The configuration *must* additionally conform `ConfigurationType` protocol
       
     }
   ```
-### Customize default configuration params:
+### Customize default configuration settings:
 The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Configuration.swift)
 > You can override some methods of constructing the url
 - urlComponents (base implementation):
@@ -62,7 +62,7 @@ The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.
 
 - toQuery()
   map current configuration to Dictionary<String, Any?>
-  for extending the default url configuration elements
+  for extending the default url [configuration](https://github.com/miromax21/miromaxPod#check-configuration)  elements
   ```swift
     func toQuery() -> [[String: Any?]] {}
   ```
@@ -78,29 +78,29 @@ The `ConfigurationType` protocol inherits [RequestConfiguration](https://github.
    - [x] append query items
 
 
-## Build
+### Build
 ```swift
   let eventSdk = EventSDK(configuration: config)
 ```
-#### - check Configuration
+#### Check Configuration
   ```swift
     var userAttributes:  [[String: Any?]]
     // eventSdk.userAttributes -> [[String: Any?]] 
   ```
 
-## Events Sending
+### Events Sending
 > You can see more Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
 ```swift
   let event = Event(contactType: .undefined, view: .start)
   eventSdk.next(event)
 ```
 
-### - SendingQueue
+#### SendingQueue
   ```swift
     var sendingQueue: [String?]
     // eventSdk.sendingQueue -> [String?]
   ```
-  #### Warning
+  ##### Warning
   > if request cannot be sended or rejected, url will be added to [sending queue](https://github.com/miromax21/miromaxPod#sendingqueue) 
 
   ```swift 
