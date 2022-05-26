@@ -26,7 +26,7 @@ public final class EventSDK: EventFactoryProtocol {
     }
     return monitor
   }()
-  private var heartbeatInterval: Double = 30.0
+//  private var heartbeatInterval: Double = 30.0
   
   /// Data sending ability trigger
   /// # Notes: #
@@ -53,8 +53,7 @@ public final class EventSDK: EventFactoryProtocol {
     queue: DispatchQueue = DispatchQueue(label: "com.tsifrasoft.EventSdkInternetMonitor")
   ) {
     self.sendService = SendService(configuration: configuration, plugins: plugins)
-    self.heartbeatInterval = configuration.heartbeatInterval
-    start(heartbeatInterval: heartbeatInterval)
+    start(heartbeatInterval: configuration.heartbeatInterval)
     monitor.start(queue: queue)
   }
   
@@ -77,7 +76,6 @@ public final class EventSDK: EventFactoryProtocol {
   }
   
   @objc private func sendHeartbeat() {
-    guard sendingIsAvailable else {return}
     let event = Event(contactType: .undefined, view: .heartBeat)
     next(event)
   }

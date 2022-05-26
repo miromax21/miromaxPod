@@ -12,15 +12,8 @@ import UIKit
 public struct Event: Equatable, Hashable {
   
   /// Event Initializer.
-  public init(
-    contactType : ContactType! = .undefined,
-              view: EventType? = nil,
-              idlc: String? = nil,
-              fts: Int64? = nil,
-              urlc: String?   = nil,
-              media: String? = nil,
-              tms: String? = nil,
-              ver: Int?  = nil) {
+  public init(contactType : ContactType! = .undefined,  view: EventType? = nil, idc: Int? = nil, idlc: String? = nil,  fts: Int64? = nil,  urlc: String?  = nil,  media: String? = nil, tms: String? = nil, ver: Int?  = nil
+  ) {
     self.idlc = idlc
     self.view = view
     self.type = contactType
@@ -31,6 +24,10 @@ public struct Event: Equatable, Hashable {
     self.ver = ver
     self.tsu = Date().getCurrentTimeStamp()
   }
+  
+  /// CatID - the ID of the local directory of the EC on the site where this EC is recorded.
+  /// Assigned by Mediascope.
+  var idc: Int?  = nil
   
   /// Content ID within the local directory
   var idlc: String? = nil
@@ -76,6 +73,7 @@ public struct Event: Equatable, Hashable {
       [Keys.urlc.rawValue : String(describing: urlc?.cString(using: .utf8))],
       [Keys.tms.rawValue : tms],
       [Keys.ver.rawValue : ver],
+      [Keys.idc.rawValue : idc],
       [Keys.idlc.rawValue : idlc],
       [Keys.view.rawValue : view],
     ]

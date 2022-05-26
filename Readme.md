@@ -33,16 +33,16 @@ You have to create configuration with the `ConfigurationType` protocol implement
   ```swift
     final class SDKConfiguration: ConfigurationType{
 
-      var cid: String? = "example_com"
-
+      var cid: String! = "example_com"
+      
       var hid: String? = "27fa89c8-e7af-435d-b0b7-0dd2b17b3fa7"
       
-      var uidc: String! = "2"
+      var uid: String? = nil
       
-      var idc: Int?
+      var idc: Int? = nil
       
-      var uid: String?
-      
+      var uidc: Int?  = 2
+
     }
   ```
 ### Customize default configuration settings:

@@ -49,6 +49,7 @@ final class SendService {
   }
   
   func sendFromQueue(){
+    guard sendingIsAvailable, !sendingQueue.isEmpty else {return}
     while sendingIsAvailable && !sendingQueue.isEmpty {
       lock.with { [weak self] in
         guard

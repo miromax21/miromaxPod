@@ -29,26 +29,23 @@ public protocol RequestConfiguration: AnyObject  {
 // serves to recognize and calculate statistics on the server side
 public protocol ConfigurationType: RequestConfiguration {
   
-  /// CatID - the ID of the local directory of the EC on the site where this EC is recorded.
-  /// Assigned by Mediascope.
-  var idc: Int! {get}
-  
-  /// User/device ID
-  var uidc: String! {get}
-  
-  ///Application/user install ID (technical)
-  var uid: String {get}
-
-  /// Identifier linked to the user's account in the Owner's system
-  var hid: String? {get}
-  
   /// Client ID.
   /// Assigned by Mediascope
   var cid: String! {get}
   
+  /// Identifier linked to the user's account in the Owner's system
+  var hid: String? {get}
+  
+  ///Application/user install ID (technical)
+  var uid: String? {get}
+  
+  /// User/device ID
+  var uidc: Int? {get}
+  
 }
 
 extension ConfigurationType {
+  
   
   public var heartbeatInterval: Double {
       return 30.0
@@ -72,7 +69,6 @@ extension ConfigurationType {
       [Keys.cid.rawValue : cid],
       [Keys.hid.rawValue : hid],
       [Keys.uidc.rawValue : uidc],
-      [Keys.idc.rawValue : idc],
       [Keys.uid.rawValue: uid],
     ]
   }
