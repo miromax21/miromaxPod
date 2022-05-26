@@ -12,18 +12,19 @@ import UIKit
 public struct Event: Equatable, Hashable {
   
   /// Event Initializer.
-  public init(contactType : ContactType! = .undefined,  view: EventType? = nil, idc: Int? = nil, idlc: String? = nil,  fts: Int64? = nil,  urlc: String?  = nil,  media: String? = nil, tms: String? = nil, ver: Int?  = nil
-  ) {
+  public init(contactType : ContactType!, view: EventType? = nil, idc: Int? = nil, idlc: String? = nil,  fts: Int64? = nil,  urlc: String?  = nil,  media: String? = nil, ver: Int?  = nil) {
     self.idlc = idlc
     self.view = view
     self.type = contactType
     self.fts = fts
     self.urlc = urlc
     self.media = media
-    self.tms = tms
     self.ver = ver
     self.tsu = Date().getCurrentTimeStamp()
   }
+  
+  /// Type of contact.
+  var type: ContactType! = .undefined
   
   /// CatID - the ID of the local directory of the EC on the site where this EC is recorded.
   /// Assigned by Mediascope.
@@ -34,9 +35,6 @@ public struct Event: Equatable, Hashable {
   
   /// event type
   var view: EventType? = nil
-  
-  /// Type of contact.
-  var type : ContactType! = .undefined
   
   /// Timestamp of the stream frame.
   /// For live broadcasts (TV broadcasts, blogger streams, etc.) corresponds to the frame broadcast time, for VOD and catch-up broadcasts - offset from the beginning of the EC in milliseconds.
@@ -51,15 +49,12 @@ public struct Event: Equatable, Hashable {
   /// The value must be encoded encodeURIComponent
   var media: String? = nil
   
-  /// The ID of the thematic section.  Assigned by Mediascope
-  var tms: String? = nil
-  
   ///The version number of the EC. Versions may differ in the content of the EC
   var ver: Int?  = nil
   
   /// The local timestamp of the curretn event
   private(set) var tsu: Int = 0
-  
+
   
   /// Request `URLQueryItem` configuration
   /// Map self to  `[URLQueryItem: Value]` for  `QueryItems`
@@ -71,7 +66,6 @@ public struct Event: Equatable, Hashable {
       [Keys.fts.rawValue : fts],
       [Keys.media.rawValue : String(describing: media?.cString(using: .utf8))],
       [Keys.urlc.rawValue : String(describing: urlc?.cString(using: .utf8))],
-      [Keys.tms.rawValue : tms],
       [Keys.ver.rawValue : ver],
       [Keys.idc.rawValue : idc],
       [Keys.idlc.rawValue : idlc],

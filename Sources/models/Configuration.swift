@@ -33,6 +33,9 @@ public protocol ConfigurationType: RequestConfiguration {
   /// Assigned by Mediascope
   var cid: String! {get}
   
+  /// The ID of the thematic section.  Assigned by Mediascope
+  var tms: String!  {get}
+  
   /// Identifier linked to the user's account in the Owner's system
   var hid: String? {get}
   
@@ -41,7 +44,7 @@ public protocol ConfigurationType: RequestConfiguration {
   
   /// User/device ID
   var uidc: Int? {get}
-  
+
 }
 
 extension ConfigurationType {
@@ -70,6 +73,7 @@ extension ConfigurationType {
       [Keys.hid.rawValue : hid],
       [Keys.uidc.rawValue : uidc],
       [Keys.uid.rawValue: uid],
+      [Keys.tms.rawValue : tms],
     ]
   }
   
