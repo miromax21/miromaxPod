@@ -10,34 +10,37 @@ import Foundation
 public enum QueryKeys: String {
   
   // ## UserData
-  
-  /// Type of contact.
-  case type = "type"
+  // ### Init
   /// Client ID.
   case cid = "cid"
-  
   case uid = "uid"
-  /// User/device ID
-  case uidc = "uidc"
-  /// Timestamp of the stream frame.
-  case fts = "fts"
   /// Identifier linked to the user's account in the Owner's system
   case hid = "hid"
   /// CatID - the ID of the local directory of the EC on the site where this EC is recorded.
   case idc = "idc"
-  /// Content unit url
-  case urlc = "urlc"
-  /// The version number of the EC. Versions may differ in the content of the EC
-  case ver = "ver"
   /// The ID of the thematic section.  Assigned by Mediascope
   case tms = "tms"
+  
+  // ### Event
+  /// Type of contact.
+  case type = "type"
+  /// User/device ID
+  case uidc = "uidc"
   /// Content ID within the local directory
   case idlc = "idlc"
-  /// The name in the directory of the channel partner or other media in which the EC is contacted
-  case media = "media"
   /// event type
   case view = "view"
-
+  /// Timestamp of the stream frame.
+  case fts = "fts"
+  /// Content unit url
+  case urlc = "urlc"
+  /// The name in the directory of the channel partner or other media in which the EC is contacted
+  case media = "media"
+  /// The version number of the EC. Versions may differ in the content of the EC
+  case ver = "ver"
+  /// Local timestamp of the event
+  case tsu = "tsu"
+  
   // ## PackageData
   
   /// Device IDs
@@ -56,8 +59,7 @@ public enum QueryKeys: String {
   case os = "os"
   /// Installation ID generated in the SDK
   case sid = "sid"
-  /// Local timestamp of the event
-  case tsu = "tsu"
+
   /// The local timestamp of when the event was sent.
   case tsc = "tsc"
 }

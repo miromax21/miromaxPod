@@ -17,22 +17,24 @@ final class DefaultPackageData {
     let device = DeviceData()
     typealias Keys = QueryKeys
     return [
-      [Keys.os.rawValue : "ios \(osVersion)".cString(using: .utf8)!],
+      [Keys.os.rawValue : "ios \(osVersion)"],
+      [Keys.typ.rawValue  : "2"],
+      [Keys.dvn.rawValue  : "apple"],
       [Keys.sid.rawValue  : device.uuid],
       [Keys.dvi.rawValue  : device.identity],
-      [Keys.typ.rawValue  : "2"],
-      [Keys.dvm.rawValue  : String(describing: device.getDeviceName().cString(using: .utf8))],
-      [Keys.dvn.rawValue  : "apple"],
+      [Keys.dvm.rawValue  : device.getDeviceName()],
       [Keys.appv.rawValue   : getBundleData(for: "CFBundleShortVersionString") ?? ""],
-      [Keys.appn.rawValue   : String(describing: (getBundleData(for: "CFBundleName") as String?)?.cString(using: .utf8))],
+      [Keys.appn.rawValue   : getBundleData(for: "CFBundleName") as String? ?? ""],
     ]
   }()
   
-  func initBaseQuery(join with: [[String: Any?]] ) -> [[String: Any?]]{
+  func initBaseQuery(join with: [[String: Any?]] ) -> [[String: Any]]{
     var query = queryDictionary
-    with
-      .filter{ $0.values.first != nil  }
-      .forEach{ query.append($0 as [String : Any])  }
+    with.forEach{
+      if let next = $0.first, let value = next.value {
+        query.append([next.key: value])
+      }
+    }
     return query
   }
   

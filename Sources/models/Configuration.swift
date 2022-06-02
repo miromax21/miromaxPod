@@ -29,6 +29,9 @@ public protocol RequestConfiguration: AnyObject  {
 // serves to recognize and calculate statistics on the server side
 public protocol ConfigurationType: RequestConfiguration {
   
+  /// User/device ID
+  var uidc: Int? {get}
+  
   /// Client ID.
   /// Assigned by Mediascope
   var cid: String! {get}
@@ -42,20 +45,17 @@ public protocol ConfigurationType: RequestConfiguration {
   ///Application/user install ID (technical)
   var uid: String? {get}
   
-  /// User/device ID
-  var uidc: Int? {get}
-
 }
 
 extension ConfigurationType {
   
   
-  public var heartbeatInterval: Double {
-      return 30.0
-  }
-  
   public var sendingQueueBufferSize: Int {
       return 1000
+  }
+  
+  public var heartbeatInterval: Double {
+      return 30.0
   }
   
   public var urlComponents: URLComponents! {

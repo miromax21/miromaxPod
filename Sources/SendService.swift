@@ -8,7 +8,7 @@
 import Foundation
 final class SendService {
   
-  lazy var baseQueryItems: [[String: Any?]] = {
+  lazy var baseQueryItems: [[String: Any]] = {
     let depaultPackage = DefaultPackageData()
     return depaultPackage.initBaseQuery(join: clientConfiguration.toQuery())
   }()

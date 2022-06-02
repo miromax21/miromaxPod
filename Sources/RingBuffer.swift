@@ -12,10 +12,11 @@ import Foundation
 
 public struct RingBuffer<T> {
   public typealias BufferTarget = (item : T?, at: Int)
-  fileprivate var array: [T?]
+
   fileprivate var readIndex = 0
   fileprivate var writeIndex = 0
   fileprivate let arraySize: Int!
+  fileprivate var array: [T?]
   
   public var state: [T?] {
     return array
@@ -25,6 +26,7 @@ public struct RingBuffer<T> {
     array = [T?](repeating: nil, count: count)
     arraySize = count
   }
+  
   @discardableResult
   public mutating func write(_ element: T) -> Bool {
     if !isFull {

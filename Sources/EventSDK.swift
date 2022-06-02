@@ -11,7 +11,7 @@ public protocol EventFactoryProtocol{
   func next( _ event: Event)
   var sendingIsAvailable: Bool {get}
   var sendingQueue: [String?] {get}
-  var userAttributes:  [[String: Any?]] {get}
+  var userAttributes:  [[String: Any]] {get}
 }
 
 public final class EventSDK: EventFactoryProtocol {
@@ -92,7 +92,7 @@ public extension EventSDK {
     return sendService.sendingQueue.state
   }
   
-  var userAttributes:  [[String: Any?]] {
+  var userAttributes:  [[String: Any]] {
     return sendService.baseQueryItems
   }
 }
