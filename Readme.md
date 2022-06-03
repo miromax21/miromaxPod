@@ -8,7 +8,7 @@
 Use the following entry in your Podfile:
 
 ```rb
-pod 'EventSDK'
+  pod 'EventSDK'
 ```
 
 ### Swift Package Manager
@@ -18,10 +18,11 @@ The [Swift Package Manager](https://swift.org/package-manager/) is a tool for au
 Once you have your Swift package set up, adding EventSDK as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
 ```swift
-dependencies: [
-    .package(url: "https://github.com/miromax21/miromaxPod.git", .upToNextMajor(from: "0.1.1"))
-]
+  dependencies: [
+      .package(url: "https://github.com/miromax21/miromaxPod.git", .upToNextMajor(from: "0.1.1"))
+  ]
 ```
+> This article is about swift using, if you want to use Objective-C you have to go [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/NS/Readme.ns.md)
 
 In any file you'd like to use EventSDK in, don't forget to
 import the framework with `import EventSDK`.
@@ -70,7 +71,7 @@ The ConfigurationType protocol inherits [RequestConfiguration](https://github.co
 - `mapQuery` 
   modify query items of the url before you send request at the `first time`:
   ```swift
-     func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
+    func mapQuery(query: [[String: Any?]]) -> [URLQueryItem] {}
   ```
 
    - [x] check

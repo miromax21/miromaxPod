@@ -25,6 +25,10 @@ public class NSEventSDK: NSObject{
     return eventSdk.sendingQueue.compactMap {$0}
   }
   
+  @objc public func getSendingAbility() -> Bool{
+    return eventSdk.sendingIsAvailable
+  }
+  
   @objc public func getUserAttributes() -> NSMutableDictionary  {
     let nsAttributes: NSMutableDictionary = [:]
     eventSdk.userAttributes.forEach{
