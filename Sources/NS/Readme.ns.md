@@ -4,8 +4,8 @@
 #### For SDK initialization use `convenience init`
 
 ```swift
-  NSMediatagSDK  *sdk = [[NSMediatagSDK alloc] initWithCid: @"cid" tms: @"tms" uid: @"uid" hid: @"hid" uidc: @1];
-```swift
+    NSMediatagSDK  *sdk = [[NSMediatagSDK alloc] initWithCid: @"cid" tms: @"tms" uid: @"uid" hid: @"hid" uidc: @1];
+```
   
 #### or advanced configuration:
 
