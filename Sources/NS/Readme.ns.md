@@ -1,13 +1,13 @@
 
 ## Usage
 ### Build
-For SDK initialization use `convenience init`
+#### For SDK initialization use `convenience init`
 
-  ```swift
-    NSMediatagSDK  *sdk = [[NSMediatagSDK alloc] initWithCid: @"cid" tms: @"tms" uid: @"uid" hid: @"hid" uidc: @1];
-  ```swift
+```swift
+  NSMediatagSDK  *sdk = [[NSMediatagSDK alloc] initWithCid: @"cid" tms: @"tms" uid: @"uid" hid: @"hid" uidc: @1];
+```swift
   
-or advanced configuration:
+#### or advanced configuration:
 
 ```swift
     NSConfiguration *configuration = [[NSConfiguration alloc] 
