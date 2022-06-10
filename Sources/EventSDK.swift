@@ -14,7 +14,7 @@ public protocol EventFactoryProtocol{
   var userAttributes:  [[String: Any]] {get}
 }
 
-public final class MediatagSDK: EventFactoryProtocol {
+public final class MediaTagSDK: EventFactoryProtocol {
   
   private let sendService: SendService!
   private var timer: Timer?
@@ -92,7 +92,7 @@ public final class MediatagSDK: EventFactoryProtocol {
   }
 }
 
-public extension MediatagSDK {
+public extension MediaTagSDK {
   var sendingQueue: [String?] {
     return sendService.sendingQueue.state
   }

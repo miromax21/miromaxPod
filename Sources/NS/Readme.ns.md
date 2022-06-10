@@ -1,29 +1,34 @@
 
 ## Usage
+### Build
+For SDK initialization use `convenience init`
 
-You have to create configuration with the `ConfigurationType` protocol implementation
+  ```swift
+    NSMediatagSDK  *sdk = [[NSMediatagSDK alloc] initWithCid: @"cid" tms: @"tms" uid: @"uid" hid: @"hid" uidc: @1];
+  ```swift
+  
+or advanced configuration:
+
 ```swift
-  ObjConfiguration *configuration = [[ObjConfiguration alloc] 
+    NSConfiguration *configuration = [[NSConfiguration alloc] 
     initWithCid: @"userCid" 
     tms: @"tms" 
     uid: @"uid" 
     hid: @"hid" 
     uidc: @1
   ];
+  NSMediatagSDK *mediatagSDK = [[NSMediatagSDK alloc] initWithConfiguration: configuration];
 
 ```
-### Build
-```swift
-    ObjEventSDK *eventSdk = [[ObjEventSDK alloc] initWithConfiguration: configuration];
-```
-#### Check Configuration
+
+### Check Configuration
   ```swift
     func getUserAttributes() -> NSMutableDictionary
   ```
 ### Events Sending
 > all Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
 ```swift
-  [eventSdk nextWithContactType:  @1
+  [mediatagSDK nextWithContactType:  @1
                            view:  @2
                             idc:  @3
                            idlc:  @"idlc"

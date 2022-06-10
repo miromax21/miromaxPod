@@ -30,20 +30,20 @@ import the framework with `import EventSDK`.
 ## Usage
 ### Build
 ```swift
-  let eventSdk = EventSDK(cid: "cid", tms: "tms", uid: "uid", hid: "hid", uidc: 3123)
+  let mediaTagSDK = MediaTagSDK(cid: "cid", tms: "tms", uid: "uid", hid: "hid", uidc: 3123)
 ```
 > for advanced configuration you can see [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/Readme.advanced.md)
 #### Check Base Attributes
   ```swift
     var userAttributes:  [[String: Any?]]
-    // eventSdk.userAttributes -> [[String: Any?]] 
+    // mediaTagSDK.userAttributes -> [[String: Any?]] 
   ```
 
 ### Events Sending
 > all Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
 ```swift
   let event = Event(contactType: .undefined, view: .start)
-  eventSdk.next(event)
+  mediaTagSDK.next(event)
 ```
 
 - `Sending availability` 
@@ -57,6 +57,6 @@ import the framework with `import EventSDK`.
 - `Sending queue`
   ```swift
     var sendingQueue: [String?]
-    // eventSdk.sendingQueue -> [String?]
+    // mediaTagSDK.sendingQueue -> [String?]
   ```
   
