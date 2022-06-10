@@ -22,7 +22,7 @@ Once you have your Swift package set up, adding EventSDK as a dependency is as e
       .package(url: "https://github.com/miromax21/miromaxPod.git", .upToNextMajor(from: "0.1.1"))
   ]
 ```
-> This article is about swift using, if you want to use Objective-C you have to go [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/NS/Readme.ns.md)
+> This article is about `swift` using, if you want to use Objective-C check [this](https://github.com/miromax21/miromaxPod/blob/master/Sources/NS/Readme.ns.md)
 
 In any file you'd like to use EventSDK in, don't forget to
 import the framework with `import EventSDK`.
