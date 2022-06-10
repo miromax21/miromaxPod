@@ -24,36 +24,40 @@ public struct Event: Equatable, Hashable {
     self.ver = ver
     self.tsu = Date().getCurrentTimeStamp()
   }
+  
+  public init(contactType : ContactType!){
+    self.type = contactType
+  }
   /// The local timestamp of the curretn event
   private(set) var tsu: Int = 0
   
   /// Type of contact.
-  var type: ContactType! = .undefined
+  public private(set) var type: ContactType! = .undefined
   ///The version number of the EC. Versions may differ in the content of the EC
   
   /// event type
-  var view: EventType? = nil
+  public var view: EventType? = nil
   
-  var ver: Int?  = nil
+  public var ver: Int?  = nil
   /// CatID - the ID of the local directory of the EC on the site where this EC is recorded.
   /// Assigned by Mediascope.
-  var idc: Int?  = nil
+  public var idc: Int?  = nil
   
   /// Timestamp of the stream frame.
   /// For live broadcasts (TV broadcasts, blogger streams, etc.) corresponds to the frame broadcast time, for VOD and catch-up broadcasts - offset from the beginning of the EC in milliseconds.
   /// Transmitted in heartbeat integrations.
-  var fts: Int64? = nil
+  public var fts: Int64? = nil
   
   /// Content ID within the local directory
-  var idlc: String? = nil
+  public var idlc: String? = nil
   
   /// Content unit url
   /// If not passed, it is cast to the canon address based on the field (http_referer)
-  var urlc: String? = nil
+  public var urlc: String? = nil
   
   /// The name in the directory of the channel partner or other media in which the EC is contacted
   /// The value must be encoded encodeURIComponent
-  var media: String? = nil
+  public var media: String? = nil
   
   /// Request `URLQueryItem` configuration
   /// Map self to  `[URLQueryItem: Value]` for  `QueryItems`

@@ -14,7 +14,7 @@ public protocol EventFactoryProtocol{
   var userAttributes:  [[String: Any]] {get}
 }
 
-public final class EventSDK: EventFactoryProtocol {
+public final class MediatagSDK: EventFactoryProtocol {
   
   private let sendService: SendService!
   private var timer: Timer?
@@ -59,6 +59,11 @@ public final class EventSDK: EventFactoryProtocol {
     monitor.start(queue: queue)
   }
   
+  public convenience init(cid: String, tms: String!, uid: String?, hid: String?, uidc: NSNumber?){
+    let config = NSConfiguration(cid: cid, tms: tms, uid: uid, hid: hid, uidc: uidc)
+    self.init(configuration: config)
+  }
+  
   /// Send next event to the server immediately
   /// - Parameters:
   ///   - event: An Event type object for sending on servert
@@ -87,7 +92,7 @@ public final class EventSDK: EventFactoryProtocol {
   }
 }
 
-public extension EventSDK {
+public extension MediatagSDK {
   var sendingQueue: [String?] {
     return sendService.sendingQueue.state
   }

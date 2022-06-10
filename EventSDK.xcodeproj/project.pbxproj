@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		CD3E5E9428041C7600A9B712 /* EventSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD3E5E9328041C7600A9B712 /* EventSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */; };
-		CD4ED2AA2848DE9100E57598 /* NSEventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2A92848DE9100E57598 /* NSEventSDK.swift */; };
+		CD4ED2AA2848DE9100E57598 /* NSMediatagSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */; };
 		CD4ED2AC2848DEB900E57598 /* NSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */; };
 		CD4ED2AE2848ECD800E57598 /* Readme.ns.md in Resources */ = {isa = PBXBuildFile; fileRef = CD4ED2AD2848ECD800E57598 /* Readme.ns.md */; };
+		CD4ED2B0284A247C00E57598 /* Readme.advanced.md in Resources */ = {isa = PBXBuildFile; fileRef = CD4ED2AF284A247C00E57598 /* Readme.advanced.md */; };
+		CD4ED2B2284A24DE00E57598 /* extention.ConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2B1284A24DE00E57598 /* extention.ConfigurationType.swift */; };
 		CD5BE7A52833ACFF00BE743C /* SendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5BE7A42833ACFF00BE743C /* SendService.swift */; };
 		CD5BE7A72834DF5100BE743C /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5BE7A62834DF5100BE743C /* RingBuffer.swift */; };
 		CD5BE7A92837985900BE743C /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = CD5BE7A82837985900BE743C /* Readme.md */; };
@@ -30,9 +32,11 @@
 		CD3E5E9028041C7600A9B712 /* EventSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EventSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3E5E9328041C7600A9B712 /* EventSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSDK.h; sourceTree = "<group>"; };
 		CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSDK.swift; sourceTree = "<group>"; };
-		CD4ED2A92848DE9100E57598 /* NSEventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSEventSDK.swift; sourceTree = "<group>"; };
+		CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMediatagSDK.swift; sourceTree = "<group>"; };
 		CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSConfiguration.swift; sourceTree = "<group>"; };
 		CD4ED2AD2848ECD800E57598 /* Readme.ns.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.ns.md; sourceTree = "<group>"; };
+		CD4ED2AF284A247C00E57598 /* Readme.advanced.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.advanced.md; sourceTree = "<group>"; };
+		CD4ED2B1284A24DE00E57598 /* extention.ConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extention.ConfigurationType.swift; sourceTree = "<group>"; };
 		CD5BE7A42833ACFF00BE743C /* SendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendService.swift; sourceTree = "<group>"; };
 		CD5BE7A62834DF5100BE743C /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
 		CD5BE7A82837985900BE743C /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 		CD3E5E9228041C7600A9B712 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CD4ED2AF284A247C00E57598 /* Readme.advanced.md */,
 				CD4ED2A82848DE7100E57598 /* NS */,
 				CDA9D181281A8FA90021A799 /* extentions */,
 				CD800F672806E9FC007EB8D2 /* models */,
@@ -95,7 +100,7 @@
 		CD4ED2A82848DE7100E57598 /* NS */ = {
 			isa = PBXGroup;
 			children = (
-				CD4ED2A92848DE9100E57598 /* NSEventSDK.swift */,
+				CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */,
 				CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */,
 				CD4ED2AD2848ECD800E57598 /* Readme.ns.md */,
 			);
@@ -118,6 +123,7 @@
 			children = (
 				CDA9D17F281A7A380021A799 /* extension.NSLock.swift */,
 				CD7BF1F9283246AE00D84B48 /* extention.Date.swift */,
+				CD4ED2B1284A24DE00E57598 /* extention.ConfigurationType.swift */,
 			);
 			path = extentions;
 			sourceTree = "<group>";
@@ -193,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5BE7A92837985900BE743C /* Readme.md in Resources */,
+				CD4ED2B0284A247C00E57598 /* Readme.advanced.md in Resources */,
 				CD4ED2AE2848ECD800E57598 /* Readme.ns.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +213,7 @@
 			files = (
 				CD800F642806B6F3007EB8D2 /* DeviceData.swift in Sources */,
 				CD800F5C28059E78007EB8D2 /* Event.swift in Sources */,
-				CD4ED2AA2848DE9100E57598 /* NSEventSDK.swift in Sources */,
+				CD4ED2AA2848DE9100E57598 /* NSMediatagSDK.swift in Sources */,
 				CD800F692806EA0A007EB8D2 /* Configuration.swift in Sources */,
 				CD7BF1FA283246AE00D84B48 /* extention.Date.swift in Sources */,
 				CD800F662806D1A1007EB8D2 /* RequestService.swift in Sources */,
@@ -218,6 +225,7 @@
 				CD4ED2AC2848DEB900E57598 /* NSConfiguration.swift in Sources */,
 				CD800F622806B6A1007EB8D2 /* QueryKeys.swift in Sources */,
 				CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */,
+				CD4ED2B2284A24DE00E57598 /* extention.ConfigurationType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

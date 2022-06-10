@@ -6,19 +6,24 @@
 //
 
 import Foundation
-public class NSEventSDK: NSObject{
-  private var eventSdk: EventSDK!
+public class NSMediatagSDK: NSObject{
+  private var eventSdk: MediatagSDK!
+
   @objc public init(configuration: NSConfiguration){
     super.init()
-    eventSdk = EventSDK(configuration: configuration)
+    eventSdk = MediatagSDK(configuration: configuration)
+  }
+  
+  @objc public convenience init(cid: String, tms: String!, uid: String?, hid: String?, uidc: NSNumber?) {
+    self.init(configuration: NSConfiguration(cid: cid, tms: tms, uid: uid, hid: hid, uidc: uidc))
   }
 
-  @objc public func next(contactType: Int, view: NSNumber?, idc: NSNumber?, idlc: String,  fts: Int64,  urlc: String,  media: String, ver: NSNumber?) {
+  @objc public func next(contactType: NSNumber, view: NSNumber?, idc: NSNumber?, idlc: NSString,  fts: Int64,  urlc: NSString,  media: String, ver: NSNumber?) {
     var eventView: EventType? = nil
     if let view = view {
       eventView = EventType(rawValue: Int(truncating: view))
     }
-    eventSdk.next(Event(contactType: ContactType(rawValue: Int(contactType)), view: eventView, idc: idc as? Int, idlc: idlc, fts: fts, urlc: urlc, media: media, ver: ver as? Int))
+    eventSdk.next(Event(contactType: ContactType(rawValue: Int(contactType)), view: eventView, idc: idc as? Int, idlc: idlc as String, fts: fts, urlc: urlc as String, media: media, ver: ver as? Int))
   }
 
   @objc public func getSendingQueue() -> Array<String>{
