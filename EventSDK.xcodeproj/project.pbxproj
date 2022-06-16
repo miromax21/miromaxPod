@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CD3E5E9428041C7600A9B712 /* EventSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD3E5E9328041C7600A9B712 /* EventSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */; };
+		CD3F0AE0285B02F400066EB9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CD3F0ADF285B02F400066EB9 /* LICENSE */; };
 		CD4ED2AA2848DE9100E57598 /* NSMediatagSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */; };
 		CD4ED2AC2848DEB900E57598 /* NSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */; };
 		CD4ED2AE2848ECD800E57598 /* Readme.ns.md in Resources */ = {isa = PBXBuildFile; fileRef = CD4ED2AD2848ECD800E57598 /* Readme.ns.md */; };
@@ -32,6 +33,7 @@
 		CD3E5E9028041C7600A9B712 /* EventSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EventSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3E5E9328041C7600A9B712 /* EventSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSDK.h; sourceTree = "<group>"; };
 		CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSDK.swift; sourceTree = "<group>"; };
+		CD3F0ADF285B02F400066EB9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMediatagSDK.swift; sourceTree = "<group>"; };
 		CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSConfiguration.swift; sourceTree = "<group>"; };
 		CD4ED2AD2848ECD800E57598 /* Readme.ns.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.ns.md; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				CD5BE7A82837985900BE743C /* Readme.md */,
+				CD3F0ADF285B02F400066EB9 /* LICENSE */,
 				CD3E5E9228041C7600A9B712 /* Sources */,
 				CD3E5E9128041C7600A9B712 /* Products */,
 			);
@@ -200,6 +203,7 @@
 			files = (
 				CD5BE7A92837985900BE743C /* Readme.md in Resources */,
 				CD4ED2B0284A247C00E57598 /* Readme.advanced.md in Resources */,
+				CD3F0AE0285B02F400066EB9 /* LICENSE in Resources */,
 				CD4ED2AE2848ECD800E57598 /* Readme.ns.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
