@@ -23,7 +23,7 @@ public class NSMediaTagSDK: NSObject{
     if let view = view {
       eventView = EventType(rawValue: Int(truncating: view))
     }
-    eventSdk.next(Event(contactType: ContactType(rawValue: Int(contactType)), view: eventView, idc: idc as? Int, idlc: idlc as String, fts: fts, urlc: urlc as String, media: media, ver: ver as? Int))
+    eventSdk.next(Event(contactType: ContactType(rawValue: contactType.intValue), view: eventView, idc: idc as? Int, idlc: idlc as String, fts: fts, urlc: urlc as String, media: media, ver: ver as? Int))
   }
 
   @objc public func getSendingQueue() -> Array<String>{

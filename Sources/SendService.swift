@@ -81,8 +81,6 @@ final class SendService {
   }
   
   private func extendQuery(join with: [[String: Any?]] ) -> [[String: Any?]]{
-    var query = baseQueryItems
-    query = query + with
-    return query
+    return baseQueryItems + with
   }
 }
