@@ -22,14 +22,13 @@ public struct Event: Equatable, Hashable {
     self.media = toString(param: media)
     self.idlc = toString(param: idlc)
     self.ver = ver
-    self.tsu = Date().getCurrentTimeStamp()
   }
   
   public init(contactType : ContactType!){
     self.type = contactType
   }
   /// The local timestamp of the curretn event
-  private(set) var tsu: Int = 0
+  public private(set) var tsu: Int = Date().getCurrentTimeStamp()
   
   /// Type of contact.
   public private(set) var type: ContactType! = .undefined

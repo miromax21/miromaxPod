@@ -1,5 +1,12 @@
 
 # MiromaxPod
+We would like to collect anonymous information about a user's online activities to create some statistics. 
+
+this framework gives you the opportunity :
+- set the sender configuration
+  > generate and cache a "basic set" of sending parameters needed to calculate statistics
+- to send Events with user data merged with the "base set"
+- autonomously manage the sending of data to the server
 
 ## Installation
 
@@ -52,7 +59,7 @@ import the framework with `import EventSDK`.
     var sendingIsAvailable: Bool
   ```
 
-  > After the internet connection is restored  the requests from the [sending queue](https://github.com/miromax21/miromaxPod#sending-queue) will try to resume, otherwise the sending of pending requests will be suspended
+  > After the internet connection is restored  the requests from the `sending queue` will try to resume, otherwise the sending of pending requests will be suspended
   
 - `Sending queue`
   ```swift
