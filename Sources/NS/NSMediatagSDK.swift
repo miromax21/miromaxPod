@@ -7,11 +7,11 @@
 
 import Foundation
 public class NSMediaTagSDK: NSObject{
-  private var eventSdk: MediaTagSDK!
+  private var eventSdk: EventSDK!
 
   @objc public init(configuration: NSConfiguration){
     super.init()
-    eventSdk = MediaTagSDK(configuration: configuration)
+    eventSdk = EventSDK(configuration: configuration)
   }
   
   @objc public convenience init(cid: String, tms: String!, uid: String?, hid: String?, uidc: NSNumber?) {

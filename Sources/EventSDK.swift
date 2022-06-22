@@ -1,20 +1,14 @@
 //
-//  EventSDK.swift
-//  EventSDK
+//  MediaTagSDK.swift
+//  MediaTagSDK
 //
 //  Created by Maksim Mironov on 11.04.2022.
 //
 
 import Foundation
 import Network
-public protocol EventFactoryProtocol{
-  func next( _ event: Event)
-  var sendingIsAvailable: Bool {get}
-  var sendingQueue: [String?] {get}
-  var userAttributes:  [[String: Any]] {get}
-}
 
-public final class MediaTagSDK: EventFactoryProtocol {
+public final class EventSDK {
   
   private let sendService: SendService!
   private var timer: Timer?
@@ -28,8 +22,7 @@ public final class MediaTagSDK: EventFactoryProtocol {
     }
     return monitor
   }()
-//  private var heartbeatInterval: Double = 30.0
-  
+
   /// Data sending ability trigger
   /// # Notes: #
   /// 1.  case `false`current  request will be add into  sendingQueue
@@ -52,7 +45,7 @@ public final class MediaTagSDK: EventFactoryProtocol {
   public init(
     configuration: ConfigurationType,
     plugins: [PluginType] = [],
-    queue: DispatchQueue = DispatchQueue(label: "com.tsifrasoft.EventSdkInternetMonitor")
+    queue: DispatchQueue = DispatchQueue(label: "com.tsifrasoftMediaTagSdkInternetMonitor")
   ) {
     self.sendService = SendService(configuration: configuration, plugins: plugins)
     start(heartbeatInterval: configuration.heartbeatInterval)
@@ -89,15 +82,16 @@ public final class MediaTagSDK: EventFactoryProtocol {
   
   deinit{
     monitor.cancel()
+    timer?.invalidate()
   }
 }
 
-public extension MediaTagSDK {
-  var sendingQueue: [String?] {
+extension EventSDK {
+  public var sendingQueue: [String?] {
     return sendService.sendingQueue.state
   }
   
-  var userAttributes:  [[String: Any]] {
+  public var userAttributes:  [[String: Any]] {
     return sendService.baseQueryItems
   }
 }
