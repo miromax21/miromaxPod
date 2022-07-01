@@ -11,13 +11,14 @@
 import Foundation
 
 public struct RingBuffer<T> {
-  public typealias BufferTarget = (item : T?, at: Int)
+
+  public typealias BufferTarget = (item: T?, at: Int)
 
   fileprivate var readIndex = 0
   fileprivate var writeIndex = 0
   fileprivate let arraySize: Int!
   fileprivate var array: [T?]
-  
+
   public var state: [T?] {
     return array
   }
@@ -26,7 +27,7 @@ public struct RingBuffer<T> {
     array = [T?](repeating: nil, count: count)
     arraySize = count
   }
-  
+
   @discardableResult
   public mutating func write(_ element: T) -> Bool {
     if !isFull {
@@ -37,8 +38,8 @@ public struct RingBuffer<T> {
       return false
     }
   }
-  
-  public mutating func clear(atIndex: Int){
+
+  public mutating func clear(atIndex: Int) {
     array[atIndex] = nil
     increment(target: &readIndex)
   }
@@ -52,8 +53,8 @@ public struct RingBuffer<T> {
       return nil
     }
   }
-  
-  fileprivate func increment(target: inout Int){
+
+  fileprivate func increment(target: inout Int) {
     let next = target + 1
     let goToStart = next < arraySize
     target = goToStart ? 0 : next

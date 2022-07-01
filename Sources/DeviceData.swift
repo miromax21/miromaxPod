@@ -9,23 +9,22 @@ import Foundation
 import AppTrackingTransparency
 import AdSupport
 import UIKit
+
 final class DeviceData {
-  
+
   var uuid: String {
-    get {
-      if let id = UserDefaults.standard.string(forKey: "uuid") {
-        return id
-      } else {
-        let uuid = UUID().uuidString
-        UserDefaults.standard.set(uuid, forKey: "uuid")
-        return uuid
-      }
+    if let id = UserDefaults.standard.string(forKey: "uuid") {
+      return id
+    } else {
+      let uuid = UUID().uuidString
+      UserDefaults.standard.set(uuid, forKey: "uuid")
+      return uuid
     }
   }
-  
+
   lazy var idfa: String? = {
     if #available(iOS 14, *) {
-        if ATTrackingManager.trackingAuthorizationStatus != ATTrackingManager.AuthorizationStatus.authorized  {
+        if ATTrackingManager.trackingAuthorizationStatus != ATTrackingManager.AuthorizationStatus.authorized {
             return nil
         }
     } else {
@@ -35,13 +34,13 @@ final class DeviceData {
     }
     return ASIdentifierManager.shared().advertisingIdentifier.uuidString
   }()
-  
+
   lazy var identity: String = {
     let idfa = self.idfa ?? ""
     let idfv = UIDevice.current.identifierForVendor?.uuidString ?? ""
     return "\(idfa);\(idfv)"
   }()
-  
+
   func getDeviceName() -> String {
     var systemInfo = utsname()
     uname(&systemInfo)
@@ -56,7 +55,8 @@ final class DeviceData {
     }
     return mapToDevice(identifier: identifier)
   }
-  
+  // swiftlint:disable cyclomatic_complexity
+  // swiftlint:disable function_body_length
   private func mapToDevice(identifier: String) -> String {
 #if os(iOS)
     switch identifier {
@@ -125,14 +125,16 @@ final class DeviceData {
     case "AppleTV6,2":                                    return "Apple TV 4K"
     case "AudioAccessory1,1":                             return "HomePod"
     case "AudioAccessory5,1":                             return "HomePod mini"
-    case "i386", "x86_64":                                return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))"
+    case "i386", "x86_64":
+      return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))"
     default:                                              return identifier
     }
 #elseif os(tvOS)
     switch identifier {
     case "AppleTV5,3": return "Apple TV 4"
     case "AppleTV6,2": return "Apple TV 4K"
-    case "i386", "x86_64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
+    case "i386", "x86_64":
+      return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
     default: return identifier
     }
 #endif
