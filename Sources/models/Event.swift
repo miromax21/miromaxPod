@@ -5,6 +5,9 @@
 //  Created by Maksim Mironov on 12.04.2022.
 //
 
+import Foundation
+import UIKit
+
 /// user Event object
 public struct Event: Equatable, Hashable {
 

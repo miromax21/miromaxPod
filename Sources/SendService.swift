@@ -1,37 +1,60 @@
 //
 //  SendService.swift
-//  MediatagSDK
+//  EventSDK
 //
 //  Created by Maksim Mironov on 17.05.2022.
 //
 
+import Foundation
+
 final class SendService {
-  var baseQueryItems: [[String: Any]] = [[:]]
-  var sendingQueue: RingBuffer<String>!
+  typealias ItemsType = String
   var sendingIsAvailable: Bool = true
-  var clientConfiguration: ConfigurationType {
+  var clientConfiguration: ConfigurationType! {
     didSet {
-      let depaultPackage = DefaultPackageData()
-      baseQueryItems = depaultPackage.initBaseQuery(join: clientConfiguration.toQuery())
+      hasFullinformation = false
+      setBaseQueryItems()
     }
   }
-  private let lock = NSRecursiveLock()
 
+  private(set) var baseQueryItems: [[String: Any]] = [[:]]
+  private(set) var sendingQueue: RingBuffer<ItemsType>!
+
+  private let lock = NSRecursiveLock()
+  private var hasFullinformation = false
   private var timer: Timer?
 
-  init(configuration: ConfigurationType) {
+  init(configuration: ConfigurationType, with: [ItemsType] = []) {
     self.clientConfiguration = configuration
-    self.sendingQueue = RingBuffer(count: clientConfiguration.sendingQueueBufferSize)
+    self.sendingQueue = RingBuffer(count: configuration.sendingQueueBufferSize)
+  }
+
+  func insertItems(items: [ItemsType]) {
+    let items = items.filter {
+      URL(string: $0) != nil
+    }
+    lock.with { [weak self] in
+      self?.sendingQueue.insert(items: items)
+    }
   }
 
   func sendNext(event: Event) {
+    if !hasFullinformation {
+      setBaseQueryItems()
+    }
     let nextQueryDictionary = extendQuery(join: event.toQuery())
     let queryItems = clientConfiguration.mapQuery(query: nextQueryDictionary)
-    var urlComponents = clientConfiguration.urlComponents
-    urlComponents?.queryItems = queryItems
-    guard let stringUrl = urlComponents?.url?.absoluteString else {
+
+    guard var stringUrl = clientConfiguration.baseUrl.appending(queryItems)?.absoluteString else {
       return
     }
+
+    if clientConfiguration.urlReplacingOccurrences.count > 0 {
+      for (spChar, repl) in clientConfiguration.urlReplacingOccurrences {
+        stringUrl = stringUrl.replacingOccurrences(of: spChar, with: repl, options: .literal, range: nil)
+      }
+    }
+
     guard sendingIsAvailable else {
       write(url: stringUrl)
       return
@@ -59,6 +82,12 @@ final class SendService {
         }
       }
     }
+  }
+
+  private func setBaseQueryItems() {
+    let defaultPackage = DefaultPackageData()
+    baseQueryItems = defaultPackage.initBaseQuery(join: clientConfiguration.toQuery())
+    hasFullinformation = defaultPackage.hasFullinformation
   }
 
   private func write(url: String) {

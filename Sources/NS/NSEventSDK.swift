@@ -1,15 +1,16 @@
 //
-//  NSMediatagSDK.swift
-//  MediatagSDK
+//  NSEventSDK.swift
+//  EventSDK
 //
 //  Created by Maksim Mironov on 02.06.2022.
 //
 
 import Foundation
-public class NSEvemtSDK: NSObject {
+
+public class NSEventSDK: NSObject {
   private var mediatagSDK: EventSDK!
 
-  @objc public static var shared = NSEvemtSDK(cid: "", tms: "", uid: nil, hid: nil, uidc: nil)
+  @objc public static var shared = NSEventSDK(cid: "", tms: "", uid: nil, hid: nil, uidc: nil)
 
   /// Creates a new SDK
   ///
@@ -80,9 +81,12 @@ public class NSEvemtSDK: NSObject {
     return mediatagSDK.sendingIsAvailable
   }
 
-  // swiftlint:disable syntactic_sugar
-  @objc public func getSendingQueue() -> Array<String> {
+  @objc public func getSendingQueue() -> [String] {
     return mediatagSDK.sendingQueue.compactMap {$0}
+  }
+
+  @objc public func setSendingQueue(items: [String]) {
+    mediatagSDK.sendingQueue = items
   }
 
   @objc public func getUserAttributes() -> NSMutableDictionary {

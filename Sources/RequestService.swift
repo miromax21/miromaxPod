@@ -1,11 +1,11 @@
 //
 //  RequestService.swift
-//  MediatagSDK
+//  EventSDK
 //
 //  Created by Maksim Mironov on 13.04.2022.
 //
+
 import Foundation
-import CoreVideo
 import UIKit
 
 public typealias Action = (_ success: Bool, _ query: String) -> Void

@@ -1,9 +1,10 @@
 //
 //  Configuration.swift
-//  MediatagSDK
+//  EventSDK
 //
 //  Created by Maksim Mironov on 13.04.2022.
 //
+
 import Foundation
 // # The list of keys to build URL
 public enum QueryKeys: String {

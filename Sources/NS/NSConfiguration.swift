@@ -6,7 +6,9 @@
 //
 
 import Foundation
+
 public class NSConfiguration: NSObject, ConfigurationType {
+
   public var cid: String = ""
 
   public var tms: String = ""

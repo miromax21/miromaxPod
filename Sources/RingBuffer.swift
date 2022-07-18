@@ -19,13 +19,22 @@ public struct RingBuffer<T> {
   fileprivate let arraySize: Int!
   fileprivate var array: [T?]
 
-  public var state: [T?] {
-    return array
+  public var state: [T] {
+    return array.compactMap { $0 }
   }
 
   public init(count: Int) {
     array = [T?](repeating: nil, count: count)
     arraySize = count
+  }
+
+  mutating func insert(items: [T]) {
+    let withCount = items.count
+    if withCount > 0 {
+      items.forEach {
+        self.write($0)
+      }
+    }
   }
 
   @discardableResult

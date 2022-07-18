@@ -1,12 +1,13 @@
 //
-//  MediatagSDK.swift
-//  MediatagSDK
+//  EventSDK.swift
+//  EventSDK
 //
 //  Created by Maksim Mironov on 11.04.2022.
 //
 
 import Foundation
 import Network
+
 public final class EventSDK {
 
   private var sendService: SendService!
@@ -22,13 +23,14 @@ public final class EventSDK {
     return monitor
   }()
 
-  internal var configuration: ConfigurationType? {
+  internal var configuration: ConfigurationType! {
     didSet {
-      guard let config = configuration else {return}
-      sendService.clientConfiguration = config
-      start(heartbeatInterval: config.heartbeatInterval)
+      sendService.clientConfiguration = configuration
+      start(heartbeatInterval: configuration.heartbeatInterval)
     }
   }
+
+ // public var private(set) trackingPermissionIsRequired = false
 
   /// Data sending ability trigger
   /// # Notes: #
@@ -57,8 +59,10 @@ public final class EventSDK {
     configuration: ConfigurationType,
     plugins: [PluginType] = []
   ) {
-    self.monitor.start(queue: DispatchQueue(label: "com.tsifrasoftMediatagSDKInternetMonitor"))
-    self.sendService = SendService(configuration: configuration)
+    monitor.start(queue: DispatchQueue(label: "com.tsifrasoftEventSDKInternetMonitor"))
+    sendService = SendService(configuration: configuration)
+    sendService.clientConfiguration = configuration
+    start(heartbeatInterval: configuration.heartbeatInterval)
   }
 
   /// SDK convenience init
@@ -112,12 +116,17 @@ public final class EventSDK {
   }
 }
 
-// MARK: MediatagSDK extension
+// MARK: EventSDK extension
 extension EventSDK {
 
   /// Queue of unsent requests
-  public var sendingQueue: [String?] {
-    return sendService.sendingQueue.state
+  public var sendingQueue: [String] {
+    get {
+      return sendService.sendingQueue.state
+    }
+    set {
+      sendService.insertItems(items: newValue)
+    }
   }
 
   public var userAttributes: [[String: Any]] {

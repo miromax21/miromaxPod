@@ -5,28 +5,16 @@
 //  Created by Maksim Mironov on 13.04.2022.
 //
 
-import Foundation
-final class DefaultPackageData {
+struct DefaultPackageData {
+
+  var hasFullinformation: Bool = false
 
   private var osVersion: String {
-      let version = ProcessInfo().operatingSystemVersion
-      return "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
+    let version = ProcessInfo().operatingSystemVersion
+    return "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
   }
 
-  private lazy var queryDictionary: [[String: Any]] = {
-    let device = DeviceData()
-    typealias Keys = QueryKeys
-    return [
-      [Keys.os.rawValue: "ios \(osVersion)"],
-      [Keys.typ.rawValue: "2"],
-      [Keys.dvn.rawValue: "apple"],
-      [Keys.sid.rawValue: device.uuid],
-      [Keys.dvi.rawValue: device.identity],
-      [Keys.dvm.rawValue: device.getDeviceName()],
-      [Keys.appv.rawValue: getBundleData(for: "CFBundleShortVersionString") ?? ""],
-      [Keys.appn.rawValue: getBundleData(for: "CFBundleName") as String? ?? ""]
-    ]
-  }()
+  private(set) var queryDictionary: [[String: Any]] = []
 
   func initBaseQuery(join with: [[String: Any?]] ) -> [[String: Any]] {
     var query = queryDictionary
@@ -36,6 +24,21 @@ final class DefaultPackageData {
       }
     }
     return query
+  }
+
+  init() {
+    let device = DeviceData()
+    queryDictionary = [
+      [QueryKeys.os.rawValue: "ios \(osVersion)"],
+      [QueryKeys.typ.rawValue: "2"],
+      [QueryKeys.dvn.rawValue: "apple"],
+      [QueryKeys.sid.rawValue: device.uuid],
+      [QueryKeys.dvi.rawValue: device.identity],
+      [QueryKeys.dvm.rawValue: device.getDeviceName()],
+      [QueryKeys.appv.rawValue: getBundleData(for: "CFBundleShortVersionString") ?? ""],
+      [QueryKeys.appn.rawValue: getBundleData(for: "CFBundleName") as String? ?? ""]
+    ]
+    hasFullinformation = device.isFulldentity
   }
 
   private func getBundleData<T>(for key: String) -> T? {

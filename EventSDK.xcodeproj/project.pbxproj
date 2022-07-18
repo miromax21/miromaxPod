@@ -10,7 +10,7 @@
 		CD3E5E9428041C7600A9B712 /* EventSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CD3E5E9328041C7600A9B712 /* EventSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */; };
 		CD3F0AE0285B02F400066EB9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CD3F0ADF285B02F400066EB9 /* LICENSE */; };
-		CD4ED2AA2848DE9100E57598 /* NSMediatagSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */; };
+		CD4ED2AA2848DE9100E57598 /* NSEventSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2A92848DE9100E57598 /* NSEventSDK.swift */; };
 		CD4ED2AC2848DEB900E57598 /* NSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */; };
 		CD4ED2AE2848ECD800E57598 /* Readme.ns.md in Resources */ = {isa = PBXBuildFile; fileRef = CD4ED2AD2848ECD800E57598 /* Readme.ns.md */; };
 		CD4ED2B0284A247C00E57598 /* Readme.advanced.md in Resources */ = {isa = PBXBuildFile; fileRef = CD4ED2AF284A247C00E57598 /* Readme.advanced.md */; };
@@ -27,6 +27,7 @@
 		CD800F692806EA0A007EB8D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F682806EA0A007EB8D2 /* Configuration.swift */; };
 		CD800F6B2806FAE8007EB8D2 /* ModelEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */; };
 		CDA9D180281A7A380021A799 /* extension.NSLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D17F281A7A380021A799 /* extension.NSLock.swift */; };
+		CDCA1A8E2875AD850058801C /* extention.URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCA1A8D2875AD850058801C /* extention.URL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +35,7 @@
 		CD3E5E9328041C7600A9B712 /* EventSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSDK.h; sourceTree = "<group>"; };
 		CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSDK.swift; sourceTree = "<group>"; };
 		CD3F0ADF285B02F400066EB9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMediatagSDK.swift; sourceTree = "<group>"; };
+		CD4ED2A92848DE9100E57598 /* NSEventSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSEventSDK.swift; sourceTree = "<group>"; };
 		CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSConfiguration.swift; sourceTree = "<group>"; };
 		CD4ED2AD2848ECD800E57598 /* Readme.ns.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.ns.md; sourceTree = "<group>"; };
 		CD4ED2AF284A247C00E57598 /* Readme.advanced.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.advanced.md; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 		CD800F682806EA0A007EB8D2 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		CD800F6A2806FAE8007EB8D2 /* ModelEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelEnums.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CDA9D17F281A7A380021A799 /* extension.NSLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.NSLock.swift; sourceTree = "<group>"; };
+		CDCA1A8D2875AD850058801C /* extention.URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extention.URL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,17 +87,17 @@
 		CD3E5E9228041C7600A9B712 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CD4ED2AF284A247C00E57598 /* Readme.advanced.md */,
-				CD4ED2A82848DE7100E57598 /* NS */,
-				CDA9D181281A8FA90021A799 /* extentions */,
 				CD800F672806E9FC007EB8D2 /* models */,
+				CDA9D181281A8FA90021A799 /* extentions */,
+				CD4ED2A82848DE7100E57598 /* NS */,
 				CD3E5E9328041C7600A9B712 /* EventSDK.h */,
-				CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */,
+				CD4ED2AF284A247C00E57598 /* Readme.advanced.md */,
+				CD800F652806D1A1007EB8D2 /* RequestService.swift */,
+				CD5BE7A62834DF5100BE743C /* RingBuffer.swift */,
+				CD5BE7A42833ACFF00BE743C /* SendService.swift */,
 				CD800F5F2806B5A9007EB8D2 /* DefaultPackageData.swift */,
 				CD800F632806B6F3007EB8D2 /* DeviceData.swift */,
-				CD800F652806D1A1007EB8D2 /* RequestService.swift */,
-				CD5BE7A42833ACFF00BE743C /* SendService.swift */,
-				CD5BE7A62834DF5100BE743C /* RingBuffer.swift */,
+				CD3E5E9A28041C8D00A9B712 /* EventSDK.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -103,7 +105,7 @@
 		CD4ED2A82848DE7100E57598 /* NS */ = {
 			isa = PBXGroup;
 			children = (
-				CD4ED2A92848DE9100E57598 /* NSMediatagSDK.swift */,
+				CD4ED2A92848DE9100E57598 /* NSEventSDK.swift */,
 				CD4ED2AB2848DEB900E57598 /* NSConfiguration.swift */,
 				CD4ED2AD2848ECD800E57598 /* Readme.ns.md */,
 			);
@@ -125,8 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				CDA9D17F281A7A380021A799 /* extension.NSLock.swift */,
-				CD7BF1F9283246AE00D84B48 /* extention.Date.swift */,
 				CD4ED2B1284A24DE00E57598 /* extention.ConfigurationType.swift */,
+				CD7BF1F9283246AE00D84B48 /* extention.Date.swift */,
+				CDCA1A8D2875AD850058801C /* extention.URL.swift */,
 			);
 			path = extentions;
 			sourceTree = "<group>";
@@ -238,7 +241,7 @@
 			files = (
 				CD800F642806B6F3007EB8D2 /* DeviceData.swift in Sources */,
 				CD800F5C28059E78007EB8D2 /* Event.swift in Sources */,
-				CD4ED2AA2848DE9100E57598 /* NSMediatagSDK.swift in Sources */,
+				CD4ED2AA2848DE9100E57598 /* NSEventSDK.swift in Sources */,
 				CD800F692806EA0A007EB8D2 /* Configuration.swift in Sources */,
 				CD7BF1FA283246AE00D84B48 /* extention.Date.swift in Sources */,
 				CD800F662806D1A1007EB8D2 /* RequestService.swift in Sources */,
@@ -249,6 +252,7 @@
 				CD3E5E9B28041C8D00A9B712 /* EventSDK.swift in Sources */,
 				CD4ED2AC2848DEB900E57598 /* NSConfiguration.swift in Sources */,
 				CD800F622806B6A1007EB8D2 /* QueryKeys.swift in Sources */,
+				CDCA1A8E2875AD850058801C /* extention.URL.swift in Sources */,
 				CD800F602806B5A9007EB8D2 /* DefaultPackageData.swift in Sources */,
 				CD4ED2B2284A24DE00E57598 /* extention.ConfigurationType.swift in Sources */,
 			);

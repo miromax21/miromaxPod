@@ -50,7 +50,7 @@ import the framework with `import EventSDK`.
 > all Event properties [here](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Event.swift)
 ```swift
   let event = Event(contactType: .undefined, view: .start)
-  mediaTagSDK.next(event)
+  EventSDK.shared.next(event)
 ```
 
 - `Sending availability` 

@@ -21,15 +21,11 @@ You have to create configuration with the `ConfigurationType` protocol implement
 ### Customize default configuration settings:
 The ConfigurationType protocol inherits [RequestConfiguration](https://github.com/miromax21/miromaxPod/blob/master/Sources/models/Configuration.swift)
 > You can override some methods of constructing the url
-- `urlComponents` (base implementation):
+- `baseUrl` (base implementation):
   ```swift
-    var urlComponents: URLComponents! {
-      var urlComponents = URLComponents()
-      urlComponents.scheme = "https"
-      urlComponents.host = "domain" 
-      urlComponents.path = "/path" // **important** use '/'
-      return urlComponents
-    }
+  var baseUrl: URL! {
+    return URL(string: "https/tns-counter.ru/e/msdkev")!
+  }
   ```
   > don't foget '/' in host trailing or path leading otherwise Request will be failed
 
@@ -54,6 +50,7 @@ The ConfigurationType protocol inherits [RequestConfiguration](https://github.co
 ### Build
 ```swift
   let eventSdk = EventSDK(configuration: config)
+  
 ```
   
 ### Prepare request
