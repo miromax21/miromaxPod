@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name = 'EventSDK'
-  s.version = '0.3.0'
+  s.version = '0.4.0'
   s.license = 'MIT'
   s.summary = 'EventSDK framework'
   s.homepage = 'https://github.com/miromax21/miromaxPod'
