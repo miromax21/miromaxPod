@@ -37,20 +37,14 @@ public struct RingBuffer<T> {
     }
   }
 
-  @discardableResult
-  public mutating func write(_ element: T) -> Bool {
-    if !isFull {
-      array[writeIndex % array.count] = element
-      increment(target: &writeIndex)
-      return true
-    } else {
-      return false
-    }
+  public mutating func write(_ element: T) {
+    array[writeIndex % array.count] = element
+    writeIndex = increment(target: writeIndex)
   }
 
   public mutating func clear(atIndex: Int) {
     array[atIndex] = nil
-    increment(target: &readIndex)
+    readIndex = increment(target: readIndex)
   }
 
   public mutating func read() -> BufferTarget? {
@@ -63,10 +57,11 @@ public struct RingBuffer<T> {
     }
   }
 
-  fileprivate func increment(target: inout Int) {
+  fileprivate func increment(target:  Int) -> Int {
     let next = target + 1
-    let goToStart = next < arraySize
-    target = goToStart ? 0 : next
+    let goToStart = next > arraySize
+   // target = goToStart ? 0 : next
+    return goToStart ? 0 : next
   }
 
   fileprivate var availableSpaceForReading: Int {

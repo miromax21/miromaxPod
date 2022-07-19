@@ -67,19 +67,21 @@ final class SendService {
   }
 
   func sendFromQueue() {
-    guard sendingIsAvailable, !sendingQueue.isEmpty else {return}
-    while sendingIsAvailable && !sendingQueue.isEmpty {
-      lock.with { [weak self] in
-        guard
-          let target = sendingQueue.read(),
-          let url = target.item
-        else {
-          return
-        }
-        sendEvent(url: url) { [weak self] success, _ in
-          if !success {return}
+    guard sendingIsAvailable, !sendingQueue.isEmpty else {
+      return
+    }
+    lock.with { [weak self] in
+      guard
+        let target = sendingQueue.read(),
+        let url = target.item
+      else {
+        return
+      }
+      sendEvent(url: url) { [weak self] success, _ in
+        if success {
           self?.sendingQueue.clear(atIndex: target.at)
         }
+        self?.sendFromQueue()
       }
     }
   }
@@ -102,6 +104,7 @@ final class SendService {
     let nextUrl = url + "&\(QueryKeys.tsc.rawValue)=\(Date().getCurrentTimeStamp())"
 
     service.sendRequest(request: URLRequest(url: URL(string: nextUrl)!)) { success in
+      print("\(success) - \(url)")
       completion?(success, url)
     }
   }
